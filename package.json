@@ -1,0 +1,22 @@
+{
+    "name": "Fitness-App",
+    "version": "0.0.1",
+    "description": "Node Capstone",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "NODE_ENV='test' mocha --exit ./test"
+    },
+    "dependencies": {
+        "express": "^4.16.2",
+        "mongo": "^0.1.0",
+        "mongoose": "^4.13.7",
+        "morgan": "^1.9.0",
+        "uuid": "^3.1.0"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-http": "^3.0.0",
+        "mocha": "^4.0.1"
+    }
+}
