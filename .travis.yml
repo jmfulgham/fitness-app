@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: PlUcloCafHRcA0SF0sp451QmAKchn/XJZJIU0Ntp9IA9D+sb3mq09ZHP4hqq3B91PT9EH4ZQchCkZxqjhJFdozNeJBCdlAfDMtJGWWaaszuua0fswwjw0VbBGFpXupSb661K6BNQkYjORIw1euDdmldJ+3p1vSILzrfV0gZWf/bOlOIqww4W0mZciRi90P8Z+hjhvXrr+BZ74/cG7PHzMePzT5fGAepEzkL0PMzn4TYEt0tnTe3/36O/JKSZkJYCDNeYHaydzDII6Zo91NSCvA0XMCemBDOWU1RGfv5kG8xpf7UbYkv0i66wkkP6AMjlglDrphn6rQKiKGPeIZF4jfBrcO47L9Q6ltB4ZIPt3GQAeJj/QTu+C6ytcc7hw7l+54xyAeEKMZt+NT+IwsVkyk2Q+NFbV1IsWCcZxbM1YC8HN2OQIp5atPGslMyXyF7uap8dAalv+tUaIq+wS0CPPl5TM/xpd3zXnBiz/+iN5CnBHTePpttQgl5psyVs7bXbBbL5CtQLOCHnvuYn9jOZsUS88UfHAg8cD2N0aQRdiaDjK3eFOAwFLd3g1hyRXM2sRFuPE4r13OVCPPDq8V24w5V3dGZNJ6XqEM9T/TgYLNXjPu4TCN8p6/F8WI5+pIuqFRtfG/pyKpNhdHKoBHGbG5lJ1ZYNfIHdYsoMtA3DI+o=
+  app: fierce-springs-45667
+  on:
+    repo: jmfulgham/fitness-app
