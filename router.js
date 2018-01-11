@@ -4,8 +4,10 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 router.use(morgan('common'));
-const routine = require('./model');
+const {routine, profile} = require('./model');
 
+
+//home page routing
 router.get('/', (req,res)=>{
     routine
     .find((error, routine)=>{
@@ -23,9 +25,15 @@ router.get('/', (req,res)=>{
     })
     .catch(err=>{
         console.log("This error is ", err);
-        res.status(500).json({message: "Internal error"});
+        res.status(500).json({message: "Internal Home Page error"});
     });
-})
+});
+
+//profile page routing
+router.get('/profile',(req,res)=>{
+    res.sendFile(__dirname + '/public/profile.html');
+   
+});
 
 module.exports= router;
 
@@ -33,4 +41,4 @@ module.exports= router;
 
 
 
-module.exports = router;
+

@@ -21,6 +21,7 @@ describe('Profile Page', function(){
         return chai.request(app)
         .get('/profile')
         .then(function(profileResponse){
+            console.log("This is the profile response !!! ", profileResponse);
             profileResponse.should.have.status(200);
         });
     });

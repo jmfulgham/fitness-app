@@ -11,6 +11,7 @@ mongoose.Promise = global.Promise;
 app.use(express.static('public'));
 
 app.use('/', router);
+app.use('/profile',router);
 app.use(morgan('common'));
 
 //enivornment setup
