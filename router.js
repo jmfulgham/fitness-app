@@ -35,6 +35,12 @@ router.get('/profile',(req,res)=>{
    
 });
 
+
+//routines list for all members
+router.get('/all-routines',(req,res)=>{
+    res.sendFile(__dirname + '/public/routineList.html');
+});
+
 module.exports= router;
 
 

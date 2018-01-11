@@ -21,8 +21,17 @@ describe('Profile Page', function(){
         return chai.request(app)
         .get('/profile')
         .then(function(profileResponse){
-            console.log("This is the profile response !!! ", profileResponse);
             profileResponse.should.have.status(200);
+        });
+    });
+});
+
+describe('All Routines page', function(){
+    it('the all-routines page should show up and populate correctly', function(){
+        return chai.request(app)
+        .get('/all-routines')
+        .then(function(routinesResponse){
+            routinesResponse.should.have.status(200);
         });
     });
 });
