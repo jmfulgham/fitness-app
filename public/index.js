@@ -71,6 +71,7 @@ var mockRoutines = {
                         "Lbs": 160
                     }
                 ]
-            }]     
+            }]
         }
-]}
+    ]
+}
