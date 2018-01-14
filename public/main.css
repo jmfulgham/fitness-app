@@ -11,3 +11,24 @@ h6 {
     font-family: 'Comfortaa', sans-serif;
    
 }
+nav {
+    height: 40px;
+    width: 100%;
+    font-size: 12px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    vertical-align: center;
+    text-align: right;
+    padding-right: 20px;
+}
+nav>a {
+    color: white;
+    text-decoration: none;
+    line-height: 40px;
+}
+body {
+    margin-top: 50px;
+}
