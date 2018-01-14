@@ -1,4 +1,3 @@
-const uuid = require('uuid');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -20,5 +19,17 @@ const routineSchema= mongoose.Schema([{
         Reps: Number,
         Lbs: Number
     }]
-
 }])
+
+routineSchema.methods.neaten = function(){
+    return{
+        id: this._id,
+        name: this.name,
+        date: this.date,
+        upper: this.upper,
+        lower: this.lower
+    }
+}
+
+const routine= mongoose.model('routine', routineSchema);
+module.exports = routine;
