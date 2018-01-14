@@ -1,18 +1,89 @@
 <!-- HTML for all workouts!-->
 <!DOCTYPE html>
- <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Node Fitness App">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="keywords" content="HTML, CSS, JavaScript, jQuery">
-        <title>My Fitness Profile</title>
-        <link href="main.css" rel="stylesheet" type="text/css" />
-    </head>   
+<html lang="en">
 
-<h1>All Routines</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Node Fitness App">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="HTML, CSS, JavaScript, jQuery">
+    <title>My Fitness Profile</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet" />
+    <link href="responsive.css" rel="stylesheet" type="text/css" />
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href="routineList.css" rel="stylesheet" type="text/css" />
+
+</head>
+<nav role= "navigation">
+    <a href="/">Home</a>
+    <a href="#">Sign Up/Log In</a>
+    <a href="/profile">My Profile</a>
+</nav>
+<body>
+    <main role="main">
+
+        <h1>All Routines</h1>
+        <div class="row" id="row">
+            <section class="col-4">
+                <h4>Lewis</h4>
+                <h6>1/11/18</h6>
+                <h6>Exercise Routines</h6>
+                <ul>Upper Body</ul>
+                <li>Exercise 1</li>
+                <li>Exercise 2</li>
+                <ul>Lower Body</ul>
+                <li>Exercise 1</li>
+                <li>Exercise 2</li>
+            </section>
+
+
+            <section class="col-4">
+                <h4>Mone't</h4>
+                <h6>1/12/18</h6>
+                <h6>Exercise Routines</h6>
+                <ul>Lower Body</ul>
+                <li>Exercise: Squats</li>
+                <li>Sets: 3</li>
+                <li>Reps: 10</li>
+                <li>Lbs: 100</li>
+
+            </section>
+            <!-- <section class="col-4">
+                <h4>Peter</h4>
+                <h6>1/12/18</h6>
+                <h6>Exercise Routines</h6>
+                <ul>Upper Body</ul>
+                <li>Exercise: Dumbell Curls</li>
+                <li>Sets: 4</li>
+                <li>Reps: 4</li>
+                <li>Lbs: 100</li>
+
+                <ul>Lower Body</ul>
+                <li>Exercise: Squats</li>
+                <li>Sets: 3</li>
+                <li>Reps: 10</li>
+                <li>Lbs: 100</li>
+            </section>
+            <section class="col-4">
+                <h4>Ivy</h4>
+                <h6>1/12/18</h6>
+                <h6>Exercise Routines</h6>
+                <ul>Lower Body</ul>
+                <li>Exercise: Squats</li>
+                <li>Sets: 3</li>
+                <li>Reps: 10</li>
+                <li>Lbs: 100</li>
+            </section>
+            -->
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="routineList.js"></script>
+</body>
 
 
 
 
- </html>
+
+</html>
