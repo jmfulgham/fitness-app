@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const routineSchema= mongoose.Schema([{
+const routineSchema= mongoose.Schema({
     id: String,
     name: String,
     date: Date,
@@ -19,7 +19,7 @@ const routineSchema= mongoose.Schema([{
         Reps: Number,
         Lbs: Number
     }]
-}])
+})
 
 routineSchema.methods.neaten = function(){
     return{
