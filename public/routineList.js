@@ -2,8 +2,7 @@ $(document).ready(function () {
 
     'use strict';
 
-    var mockProfile = {
-        "id": "39u5tenkfr94535",
+    var mockProfile = [{
         "name": "Willy Warm-Up",
         "date": "1.10.18",
         "upper": [{
@@ -43,20 +42,46 @@ $(document).ready(function () {
             "Reps": 3,
             "Lbs": 105
         }]
-    }
+    },
+        {
+            "name": "Linda Legs",
+            "date": "1.01.18",
+            "upper": [
+                {
+                }
+            ],
+            "lower": [
+                {
+                    "Exercise": "Goblet Squats",
+                    "Sets": 3,
+                    "Reps": 15,
+                    "Lbs": 35
+                },
+                {
+                    "Exercise": "Backwards Lunges",
+                    "Sets": 3,
+                    "Reps": 15,
+                    "Lbs": 65
+                },
+                {
+                    "Exercise": "Hang Snatches",
+                    "Sets": 5,
+                    "Reps": 3,
+                    "Lbs": 105
+                }
+            ]
+        }    
+    ]
 
 
     function showNameAndDate(profile) {
         let name = profile.name;
         let date = profile.date;
-        $(".row").append(`<section class="col-3 new-profile"><h4>${name}</h4><h6>${date}</h6>
-            </section>`);
-        showUpperWorkout(profile);
-        showLowerWorkout(profile);
+        return `<section class="col-3 new-profile"><h4>${name}</h4><h6>${date}</h6>
+            </section>`;
     }
 
-    function showUpperWorkout(workout) {
-        let upper = workout.upper;
+    function showUpperWorkout(upper) {
         $(".new-profile").append(`<section class="workout"><h5>Upper Body</h5>`);
         upper.forEach(function (upperBody) {
             if (upperBody === undefined) {
