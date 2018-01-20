@@ -11,7 +11,9 @@ h6 {
     font-family: 'Comfortaa', sans-serif;
    
 }
+
 .nav {
+
     height: 40px;
     width: 100%;
     font-size: 12px;
@@ -25,6 +27,7 @@ h6 {
     padding-right: 20px;
 }
 
+
 body {
     margin-top: 100px;
 }
@@ -33,4 +36,13 @@ a {
     color: white;
     text-decoration: none;
     line-height: 40px;
+
+nav>a {
+    color: white;
+    text-decoration: none;
+    line-height: 40px;
+}
+body {
+    margin-top: 50px;
+
 }
