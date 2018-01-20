@@ -1,0 +1,70 @@
+[{
+        "name": "Willy Warm-Up",
+        "date": "1.10.18",
+        "upper": [{
+                "Exercise": "Benchpress",
+                "Sets": 4,
+                "Reps": 10,
+                "Lbs": 150
+            },
+
+            {
+                "Exercise": "Chest Fly",
+                "Sets": 3,
+                "Reps": 12,
+                "Lbs": 120
+            },
+
+            {
+                "Exercise": "Shoulder Press",
+                "Sets": 4,
+                "Reps": 10,
+                "Lbs": 100
+            }
+        ],
+        "lower": [{
+            "Exercise": "Goblet Squats",
+            "Sets": 3,
+            "Reps": 15,
+            "Lbs": 35
+        }, {
+            "Exercise": "Backwards Lunges",
+            "Sets": 3,
+            "Reps": 15,
+            "Lbs": 65
+        }, {
+            "Exercise": "Hang Snatches",
+            "Sets": 5,
+            "Reps": 3,
+            "Lbs": 105
+        }]
+},
+{
+        "name": "Linda Legs",
+        "date": "1.01.18",
+        "upper": [
+            {
+            }
+        ],
+        "lower": [
+            {
+                "Exercise": "Goblet Squats",
+                "Sets": 3,
+                "Reps": 15,
+                "Lbs": 35
+            },
+            {
+                "Exercise": "Backwards Lunges",
+                "Sets": 3,
+                "Reps": 15,
+                "Lbs": 65
+            },
+            {
+                "Exercise": "Hang Snatches",
+                "Sets": 5,
+                "Reps": 3,
+                "Lbs": 105
+            }
+        ]
+}  
+]  

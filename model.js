@@ -2,17 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const routineSchema= mongoose.Schema({
-    id: String,
+const routineSchema = mongoose.Schema({
     name: String,
     date: Date,
-    upper : [{
+    upper: [{
         Exercise: String,
         Sets: Number,
         Reps: Number,
         Lbs: Number
-    }], 
-    //what needs to happen to ensure we can have more than one object?
+    }],
+  
     lower: [{
         Exercise: String,
         Sets: Number,
@@ -21,8 +20,8 @@ const routineSchema= mongoose.Schema({
     }]
 })
 
-routineSchema.methods.neaten = function(){
-    return{
+routineSchema.methods.neaten = function () {
+    return {
         id: this._id,
         name: this.name,
         date: this.date,
@@ -31,5 +30,5 @@ routineSchema.methods.neaten = function(){
     }
 }
 
-const routine= mongoose.model('routine', routineSchema);
+const routine = mongoose.model('routine', routineSchema, 'routine');
 module.exports = routine;
