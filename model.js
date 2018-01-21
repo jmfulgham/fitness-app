@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const routineSchema = mongoose.Schema({
     name: String,
+    username: String,
     date: Date,
     upper: [{
         Exercise: String,
@@ -23,6 +24,7 @@ const routineSchema = mongoose.Schema({
 routineSchema.methods.neaten = function () {
     return {
         id: this._id,
+        username: this.username,
         name: this.name,
         date: this.date,
         upper: this.upper,

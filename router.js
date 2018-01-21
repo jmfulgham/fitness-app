@@ -31,7 +31,22 @@ router.get('/profile/:id', (req, res) => {
                 })
         })
 });
+router.get('/profile/name/:username', (req, res) => {
+    console.log("this is the username ", req.params.username);
+    routine.find({
+            username: req.params.username
+        })
+        .then(profile => {
+            
+            res.json(profile.map(list => list.neaten()))
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: "Unable to get all routines"
+            });
 
+        });
+});
 
 
 
@@ -47,9 +62,10 @@ router.get('/profile/:id', (req, res) => {
 
 //how do I make sure this posts to the correct profile?
 router.post('/profile/:id', jsonParser, (req, res) => {
-    
+
     const newRoutine = new routine({
         name: req.body.name,
+        username: req.body.username,
         date: req.body.date,
         upper: [{
             Exercise: req.body.Exercise,
@@ -73,19 +89,25 @@ router.post('/profile/:id', jsonParser, (req, res) => {
     })
 })
 
-router.put('/profile/:id',(req, res)=>{
-    if (!(req.params.id === req.body.id)){
-        res.status(400).json({message:"Wrong ID"});
+router.put('/profile/:id', (req, res) => {
+    if (!(req.params.id === req.body.id)) {
+        res.status(400).json({
+            message: "Wrong ID"
+        });
     }
-    res.json({"message":"Successfully put!"});
-} )
+    res.json({
+        "message": "Successfully put!"
+    });
+})
 
-router.delete('/profile/:id',(req,res)=>{
+router.delete('/profile/:id', (req, res) => {
     console.log("This is the request ", req);
     routine
-    .findByIdAndRemove(req.params.id)
+        .findByIdAndRemove(req.params.id)
         .then(fitness => res.status(204).end())
-        .catch(err => res.status(500).json({ message: 'Internal server error' }));
+        .catch(err => res.status(500).json({
+            message: 'Internal server error'
+        }));
 });
 
 
