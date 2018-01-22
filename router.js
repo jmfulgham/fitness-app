@@ -10,10 +10,8 @@ const mongoose = require('mongoose');
 
 //home page routing
 router.get('/', (req, res) => {
-    //res.sendFile(__dirname + '/public/index.html')
+
 });
-
-
 
 //profile page
 router.get('/profile/name/:username', (req, res) => {
@@ -33,57 +31,40 @@ router.get('/profile/name/:username', (req, res) => {
 });
 
 router.post('/profile/name/:username', jsonParser, (req, res) => {
-    var post = new routine({
+    let newRoutine = new routine({
         name: req.body.name,
         username: req.body.username,
         date: req.body.date,
-        upper: [{
-            Exercise: req.body.Exercise,
-            Sets: req.body.Sets,
-            Reps: req.body.Reps,
-            Lbs: req.body.Lbs
-        }],
-        lower: [{
-            Exercise: req.body.Exercise,
-            Sets: req.body.Sets,
-            Reps: req.body.Reps,
-            Lbs: req.body.Lbs
-        }]
+        upper: req.body.upper,
+        lower: req.body.lower
     })
-    post.save(function (err, post) {
-        if (err) {
-            return next(err)
-        }
-        res.json(201, post)
-    })
-    // .then(newList=>{
-    //     res.status(201).json(newList.neaten())
-    // })
-    //     .catch(error => {
-    //         res.status(500).json({ message: "Error, didn't save" })
-    //     });
-})
+    newRoutine.save()
+        .then(newRoutine => {
+            res.status(201).json(newRoutine.neaten());
 
-
-
-//each workout page routing
-router.get('/workout/:id', (req, res) => {
-    console.log("this is the ID ", req.params.id, typeof (req.params.id));
-    routine
-        .findById(req.params.id)
-        .then(function (profile) {
-            console.log("this is routine", profile);
-            res.json(profile.neaten())
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        "message": "Internal Error in profile"
-                    })
-                })
         })
+        .catch(err => {
+            res.status(500).json({
+                error: 'Something went wrong'
+            });
+        });
 });
 
 
+//each workout page 
+router.get('/workout/:id', (req, res) => {
+
+    routine
+        .findById(req.params.id)
+        .then(function (profile) {
+            res.json(profile.neaten())
+                .catch(err => {
+                    res.status(500).json({
+                        "message": "Internal Error in profile"
+                    });
+                });
+        });
+});
 
 router.put('/workout/:id', jsonParser, (req, res) => {
 
@@ -104,14 +85,11 @@ router.put('/workout/:id', jsonParser, (req, res) => {
             res.status(500).json({
                 message: "Server error"
             });
-            console.log("Error ", err);
         });
 });
 
 
-
 router.delete('/workout/:id', (req, res) => {
-    console.log("This is the request ", req);
     routine
         .findByIdAndRemove(req.params.id)
         .then(fitness => res.status(204).end())
@@ -120,9 +98,8 @@ router.delete('/workout/:id', (req, res) => {
         }));
 });
 
-////////////////////routines list for all members
+//routines list for all members
 router.get('/all-routines', (req, res) => {
-    //res.sendFile(__dirname + '/public/routineList.html');
     routine
         .find()
         .then(fit => {
