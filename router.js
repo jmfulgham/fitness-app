@@ -10,68 +10,96 @@ const mongoose = require('mongoose');
 
 //home page routing
 router.get('/', (req, res) => {
-    //res.sendFile(__dirname + '/public/index.html')
+
 });
 
-//profile page routing
-router.get('/profile/:id', (req, res) => {
-    //how to accomplish this with name of profile that has several workouts?
-    console.log("this is the ID ", req.params.id, typeof (req.params.id));
+//profile page
+router.get('/profile/name/:username', (req, res) => {
+    routine.find({
+            username: req.params.username
+        })
+        .then(profile => {
+
+            res.json(profile.map(list => list.neaten()))
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: "Unable to get all routines"
+            });
+
+        });
+});
+
+router.post('/profile/name/:username', jsonParser, (req, res) => {
+    let newRoutine = new routine({
+        name: req.body.name,
+        username: req.body.username,
+        date: req.body.date,
+        upper: req.body.upper,
+        lower: req.body.lower
+    })
+    newRoutine.save()
+        .then(newRoutine => {
+            res.status(201).json(newRoutine.neaten());
+
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'Something went wrong'
+            });
+        });
+});
+
+
+//each workout page 
+router.get('/workout/:id', (req, res) => {
+
     routine
         .findById(req.params.id)
         .then(function (profile) {
-            console.log("this is routine", profile);
             res.json(profile.neaten())
                 .catch(err => {
-                    console.log(err);
                     res.status(500).json({
                         "message": "Internal Error in profile"
-                    })
-                })
+                    });
+                });
+        });
+});
+
+router.put('/workout/:id', jsonParser, (req, res) => {
+
+    req.params.name = req.body.name || req.params.name;
+    req.params.date = req.body.date || req.params.date;
+    req.params.upper = req.body.upper || req.params.upper;
+    req.params.lower = req.body.lower || req.params.lower
+
+    let toUpdate = {}
+    routine
+        .findByIdAndUpdate(req.params.id, req.body, {
+            $set: toUpdate
         })
+        .then(updatedList => {
+            res.status(204).end()
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Server error"
+            });
+        });
 });
 
 
+router.delete('/workout/:id', (req, res) => {
+    routine
+        .findByIdAndRemove(req.params.id)
+        .then(fitness => res.status(204).end())
+        .catch(err => res.status(500).json({
+            message: 'Internal server error'
+        }));
+});
 
-//how do I make sure this posts to the correct profile?
-router.post('/profile/:id', jsonParser, (req, res) => {
-    //res.sendFile(__dirname + '/public/profile.html');
-    const newRoutine = new routine({
-        name: req.body.name,
-        date: req.body.date,
-        upper: [{
-            Exercise: req.body.Exercise,
-            Sets: req.body.Sets,
-            Reps: req.body.Reps,
-            Lbs: req.body.Lbs
-        }],
-        lower: [{
-            Exercise: req.body.Exercise,
-            Sets: req.body.Sets,
-            Reps: req.body.Reps,
-            Lbs: req.body.Lbs
-        }]
-    })
-    newRoutine.save((error) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("successfully saved");
-        }
-    })
-})
-
-router.put('/profile/:id',(req, res)=>{
-    if (req.params.id !== req.body.id){
-        res.status(500).json({"message":"Wrong ID"});
-    }
-} )
-
-
-
-//routines list for all membersø
+//routines list for all members
 router.get('/all-routines', (req, res) => {
-    //res.sendFile(__dirname + '/public/routineList.html');
     routine
         .find()
         .then(fit => {
