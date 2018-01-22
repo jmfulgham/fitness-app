@@ -37,6 +37,8 @@ describe('Testing CRUD', function () {
                 profileResponse.should.be.an('object');
             });
     });
+    
+     
 
     it('should create a new routine on POST', () => {
         const newRoutine = {
@@ -90,7 +92,25 @@ describe('Testing CRUD', function () {
                 res.body.should.include.keys('name', 'username', 'date', 'upper', 'lower');
             });
     });
+    
+    //deleting a workout
+    it('should delete a workout on DELETE', () => chai.request(app)
+        .get('/workout/!!!insertID')
+        .then(res => chai.request(app)
+            .delete(`/workout/${res.body[0].id}`)
+            .then((res) => {
+                res.should.have.status(204);
+            })));
 
+    it('should update a workout on PUT', () => chai.request(app)
+        .get('/workout/!!!insertID')
+        .then(res => chai.request(app)
+            .put(`/workout/${res.body[0].id}`)
+            .send({ "id": res.body[0].id, "uppper":[{"Exercise": "Upright Row", "Sets" : 2, "Reps" : 12, "Lbs": 140})
+            .then((res) => {
+                res.should.have.status(204);
+            })));
+    
     it('the all-routines page should show up and populate correctly', function () {
         return chai.request(app)
             .get('/all-routines')
