@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 //home page routing
 router.get('/', (req, res) => {
- 
+
 });
 
 //profile page
@@ -19,10 +19,27 @@ router.get('/profile/name/:username', (req, res) => {
             username: req.params.username
         })
         .then(profile => {
-
-            //res.json(profile.map(list => list.neaten()))
             const user = profile.map(list => list.neaten());
-            res.render('profile', { user: JSON.stringify(user) })
+            const shortList = user.map(fullList => {let workoutDate= fullList.date; let upperBody= fullList.upper; let lowerBody= fullList.lower;
+            let totalProfile = workoutDate + upperBody + lowerBody;
+                return totalProfile});
+            console.log(shortList);
+            const profileName = user[0].name; //only need one name
+            const userName = user[0].username; //only need on username
+            const workoutDate = user.map(dates => {
+                return dates.date
+            });
+            const upperBody = user.map(upperWorkout => {
+                return upperWorkout.upper
+            });
+            const lowerBody = user.map(lowerWorkout => {
+                return lowerWorkout.lower
+            });
+
+            res.render('profile', {
+                user: JSON.stringify(user)
+            })
+
         })
         .catch(err => {
             res.status(500).json({
@@ -33,8 +50,20 @@ router.get('/profile/name/:username', (req, res) => {
 });
 
 router.post('/profile/name/:username', jsonParser, (req, res) => {
-    const { name, username, date, upper, lower } = req.body;
-    const newRoutine = new routine({ name, username, date, upper, lower });
+    const {
+        name,
+        username,
+        date,
+        upper,
+        lower
+    } = req.body;
+    const newRoutine = new routine({
+        name,
+        username,
+        date,
+        upper,
+        lower
+    });
 
     newRoutine.save()
         .then(newRoutine => {
