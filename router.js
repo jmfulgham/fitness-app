@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 
 //home page routing
 router.get('/', (req, res) => {
-
 });
 
 //profile page
@@ -20,35 +19,32 @@ router.get('/profile/name/:username', (req, res) => {
         })
         .then(profile => {
             const user = profile.map(list => list.neaten());
-            const shortList = user.map(fullList => {let workoutDate= fullList.date; let upperBody= fullList.upper; let lowerBody= fullList.lower;
-            let totalProfile = workoutDate + upperBody + lowerBody;
-                return totalProfile});
-            console.log(shortList);
-            const profileName = user[0].name; //only need one name
-            const userName = user[0].username; //only need on username
-            const workoutDate = user.map(dates => {
-                return dates.date
-            });
-            const upperBody = user.map(upperWorkout => {
-                return upperWorkout.upper
-            });
-            const lowerBody = user.map(lowerWorkout => {
-                return lowerWorkout.lower
-            });
+
+            for (let i = 0; i < user.length; i++) {
+                let workoutDate = user[i].date;
+                let upperBody = user[i].upper;
+                let lowerBody = user[i].lower;
+                let newUpper= upperBody.toString();
+                let newLower= lowerBody.toString();
+                let fullWorkout= workoutDate + newUpper + newLower;
+                console.log (fullWorkout);
+            }
+            
 
             res.render('profile', {
-                user: JSON.stringify(user)
+                    user: JSON.stringify(fullWorkout)
+                })
             })
+                .catch(err => {
+                    res.status(500).json({
+                        error: "Unable to get all routines"
+                    });
+
+                });
 
         })
-        .catch(err => {
-            res.status(500).json({
-                error: "Unable to get all routines"
-            });
 
-        });
-});
-
+//})
 router.post('/profile/name/:username', jsonParser, (req, res) => {
     const {
         name,
