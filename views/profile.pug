@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    title= "My Profile"
+    link(href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet")
+    style
+        include main.css
+        include responsive.css
+        
+    
+nav  
+     a(href="/#") Home      
+     a(href="/sign-up") Sign Up      
+     a(href="/all-routines") All Routines
+body
+    h1 My Profile
+    div
+        .list
+            #{user}
+    

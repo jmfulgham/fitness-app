@@ -9,10 +9,9 @@ h4,
 h5,
 h6 {
     font-family: 'Comfortaa', sans-serif;
-   
 }
 
-.nav {
+nav {
 
     height: 40px;
     width: 100%;
@@ -28,20 +27,17 @@ h6 {
 }
 
 
-body {
-    margin-top: 100px;
-}
-
-a {
+/* a {
     color: white;
     text-decoration: none;
-    line-height: 40px;
+    line-height: 40px; */
 
-nav>a {
+nav > a {
     color: white;
     text-decoration: none;
     line-height: 40px;
 }
+
 body {
     margin-top: 50px;
 
