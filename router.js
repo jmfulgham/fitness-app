@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 //home page routing
 router.get('/', (req, res) => {
-
+ 
 });
 
 //profile page
@@ -20,7 +20,9 @@ router.get('/profile/name/:username', (req, res) => {
         })
         .then(profile => {
 
-            res.json(profile.map(list => list.neaten()))
+            //res.json(profile.map(list => list.neaten()))
+            const user = profile.map(list => list.neaten());
+            res.render('profile', { user: JSON.stringify(user) })
         })
         .catch(err => {
             res.status(500).json({
@@ -31,13 +33,9 @@ router.get('/profile/name/:username', (req, res) => {
 });
 
 router.post('/profile/name/:username', jsonParser, (req, res) => {
-    let newRoutine = new routine({
-        name: req.body.name,
-        username: req.body.username,
-        date: req.body.date,
-        upper: req.body.upper,
-        lower: req.body.lower
-    })
+    const { name, username, date, upper, lower } = req.body;
+    const newRoutine = new routine({ name, username, date, upper, lower });
+
     newRoutine.save()
         .then(newRoutine => {
             res.status(201).json(newRoutine.neaten());
@@ -67,11 +65,6 @@ router.get('/workout/:id', (req, res) => {
 });
 
 router.put('/workout/:id', jsonParser, (req, res) => {
-
-    req.params.name = req.body.name || req.params.name;
-    req.params.date = req.body.date || req.params.date;
-    req.params.upper = req.body.upper || req.params.upper;
-    req.params.lower = req.body.lower || req.params.lower
 
     let toUpdate = {}
     routine
