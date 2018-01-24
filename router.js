@@ -20,9 +20,9 @@ router.get('/profile/name/:username', (req, res) => {
         })
         .then(profile => {
 
-            //res.json(profile.map(list => list.neaten()))
-            const user = profile.map(list => list.neaten());
-            res.render('profile', { user: JSON.stringify(user) })
+            res.json(profile.map(list => list.neaten()))
+            // const user = profile.map(list => list.neaten());
+            // res.render('profile', { user: JSON.stringify(user) })
         })
         .catch(err => {
             res.status(500).json({
