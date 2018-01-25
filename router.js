@@ -36,6 +36,10 @@ router.get('/profile/name/:username', (req,res)=>{
     res.sendFile(__dirname + '/public/HTML/profile.html');
 })
 
+router.get('/all-routines/', (req,res)=>{
+    res.sendFile(__dirname + '/public/HTML/routineList.html');
+}
+)
 router.post('/profile/JSON/:username', jsonParser, (req, res) => {
     const { name, username, date, upper, lower } = req.body;
     const newRoutine = new routine({ name, username, date, upper, lower });
