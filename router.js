@@ -10,19 +10,19 @@ const mongoose = require('mongoose');
 
 //home page routing
 router.get('/', (req, res) => {
- 
+    res.sendFile(__dirname + '/public/HTML/index.html');
 });
 
 //profile page
-router.get('/profile/name/:username', (req, res) => {
+router.get('/profile/JSON/:username', (req, res) => {
+    //change all profile/name/... to profile/JSON
     routine.find({
             username: req.params.username
         })
         .then(profile => {
 
             res.json(profile.map(list => list.neaten()))
-            // const user = profile.map(list => list.neaten());
-            // res.render('profile', { user: JSON.stringify(user) })
+            
         })
         .catch(err => {
             res.status(500).json({
@@ -32,7 +32,11 @@ router.get('/profile/name/:username', (req, res) => {
         });
 });
 
-router.post('/profile/name/:username', jsonParser, (req, res) => {
+router.get('/profile/name/:username', (req,res)=>{
+    res.sendFile(__dirname + '/public/HTML/profile.html');
+})
+
+router.post('/profile/JSON/:username', jsonParser, (req, res) => {
     const { name, username, date, upper, lower } = req.body;
     const newRoutine = new routine({ name, username, date, upper, lower });
 
@@ -50,7 +54,7 @@ router.post('/profile/name/:username', jsonParser, (req, res) => {
 
 
 //each workout page 
-router.get('/workout/:id', (req, res) => {
+router.get('/workout/JSON/:id', (req, res) => {
 
     routine
         .findById(req.params.id)
@@ -64,7 +68,7 @@ router.get('/workout/:id', (req, res) => {
         });
 });
 
-router.put('/workout/:id', jsonParser, (req, res) => {
+router.put('/workout/JSON/:id', jsonParser, (req, res) => {
 
     let toUpdate = {}
     routine
@@ -82,7 +86,7 @@ router.put('/workout/:id', jsonParser, (req, res) => {
 });
 
 
-router.delete('/workout/:id', (req, res) => {
+router.delete('/workout/JSON/:id', (req, res) => {
     routine
         .findByIdAndRemove(req.params.id)
         .then(fitness => res.status(204).end())
@@ -92,7 +96,7 @@ router.delete('/workout/:id', (req, res) => {
 });
 
 //routines list for all members
-router.get('/all-routines', (req, res) => {
+router.get('/all-routines/JSON', (req, res) => {
     routine
         .find()
         .then(fit => {
