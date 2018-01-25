@@ -1,84 +1,42 @@
-$(document).ready(function () {
+
 
     'use strict';
 
-    var mockProfile = [{
-        "name": "Willy Warm-Up",
-        "date": "1.10.18",
-        "upper": [{
-                "Exercise": "Benchpress",
-                "Sets": 4,
-                "Reps": 10,
-                "Lbs": 150
-            },
 
-            {
-                "Exercise": "Chest Fly",
-                "Sets": 3,
-                "Reps": 12,
-                "Lbs": 120
-            },
 
-            {
-                "Exercise": "Shoulder Press",
-                "Sets": 4,
-                "Reps": 10,
-                "Lbs": 100
+    function getAllRoutines() {
+        $.ajax({
+            type: "GET",
+            url: `http://localhost:9000/all-routines/JSON/`,
+            dataType: 'json',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            success: function (list) {
+                showNames(list)
             }
-        ],
-        "lower": [{
-            "Exercise": "Goblet Squats",
-            "Sets": 3,
-            "Reps": 15,
-            "Lbs": 35
-        }, {
-            "Exercise": "Backwards Lunges",
-            "Sets": 3,
-            "Reps": 15,
-            "Lbs": 65
-        }, {
-            "Exercise": "Hang Snatches",
-            "Sets": 5,
-            "Reps": 3,
-            "Lbs": 105
-        }]
-    },
-        {
-            "name": "Linda Legs",
-            "date": "1.01.18",
-            "upper": [
-                {
-                }
-            ],
-            "lower": [
-                {
-                    "Exercise": "Goblet Squats",
-                    "Sets": 3,
-                    "Reps": 15,
-                    "Lbs": 35
-                },
-                {
-                    "Exercise": "Backwards Lunges",
-                    "Sets": 3,
-                    "Reps": 15,
-                    "Lbs": 65
-                },
-                {
-                    "Exercise": "Hang Snatches",
-                    "Sets": 5,
-                    "Reps": 3,
-                    "Lbs": 105
-                }
-            ]
-        }    
-    ]
+        })
+    }
 
 
-    function showNameAndDate(profile) {
-        let name = profile.name;
-        let date = profile.date;
-        return `<section class="col-3 new-profile"><h4>${name}</h4><h6>${date}</h6>
-            </section>`;
+    //request all profiles URL with username
+    //get request of URL with username
+    //get all workouts with username
+    //find in database with username
+    //get all workouts separated by date
+    //organize upper and lower by date
+    //section workouts by date
+    //show each workout by date in its own section
+
+
+
+    function showNames(list) {
+        list.map(function(fullList){
+            let name = fullList.name;
+            return $(".row").append(`<section class="section col-3 shadow">
+        <h3>${name}</h3> <button type="submit">View My Profile</button>
+    </section>`);
+        })
     }
 
     function showUpperWorkout(upper) {
@@ -104,8 +62,7 @@ $(document).ready(function () {
             <li>Reps: ${lowerBody.Reps}</li><li>Lbs: ${lowerBody.Lbs}</li>`);
         })
     }
-    
 
-    showNameAndDate(mockProfile);
 
-})
+   
+

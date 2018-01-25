@@ -4,10 +4,37 @@ row {
     padding: 15px;
 }
 
-section {
-    display: block;
-    min-height:450px;
-    min-width:33%
+.section {
+    margin: 20px;
+    padding: 10px;
+    min-height: 150px;
+    background-color: white;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.shadow {
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+}
+
+button {
+    height: 40px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 8px 6px -8px black;
+}
+
+button:hover {
+    -webkit-transition: all 1500ms ease-in;
+    -webkit-transform: scale(1.2);
+    -ms-transition: all 1500ms ease-in;
+    -ms-transform: scale(1.2);
+    -moz-transition: all 1500ms ease-in;
+    -moz-transform: scale(1.2);
+    transition: all 1500ms ease-in;
+    transform: scale(1.2);
 }
 
 
