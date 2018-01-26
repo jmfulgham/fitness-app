@@ -9,19 +9,50 @@ function getAllRoutines() {
             "Content-Type": "application/json"
         },
         success: function (list) {
-            showNames(list)
+            handleNames(list)
+        }
+    })
+}
+
+//pull the username from /profile/name/:username
+//sent the username to my API request
+//create API request for profile/JSON/:username
+//return API data to front end
+//separate data by date to front end
+//create small cards with each workout listed by date
+
+function getProfile(username) {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:9000/profile/JSON/${username}`,
+        dataType: 'json',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        success: function (userProfile) {
+            createSections(userProfile);
         }
     })
 }
 
 
-function showNames(list) {
+
+function createSections(fullWorkout) {
+    console.log("full ", fullWorkout);
+    $('.list').append(`<div class="full"><h3>${fullWorkout.date}</h3><section class="upper"></section><section class=
+    "lower"></section</div>`)
+}
+
+
+function handleNames(list) {
     let newList = removeDupes(list);
     newList.map(function (shortList) {
         let name = shortList.name;
-        return $(".row").append(`<section class="section col-3 shadow">
-        <h3>${name}</h3> <button type="submit">View My Profile</button>
-    </section>`);
+        let username= shortList.username;
+        $(".row").append(`<section class="section col-3 shadow">
+        <h3>${name}</h3> <button type="submit"><a href="/profile/name/${username}" target="blank">
+        View My Profile</a></button></section>`);
+    clickButton(username);
     })
 }
 
@@ -38,26 +69,10 @@ function removeDupes(list) {
     return arr;
 }
 
-function showUpperWorkout(upper) {
-    $(".new-profile").append(`<section class="workout"><h5>Upper Body</h5>`);
-    upper.forEach(function (upperBody) {
-        if (upperBody === undefined) {
-            return $(".workout").append("<h4> No upper body workout </h4>")
-        }
-        $(".workout").append(`<ul>${upperBody.Exercise}</ul><li>Sets: ${upperBody.Sets}</li>
-            <li>Reps: ${upperBody.Reps}</li><li>Lbs: ${upperBody.Lbs}</li>`);
-    })
-}
-
-function showLowerWorkout(workouts) {
-    let lower = workouts.lower;
-    console.log("Lower ", lower);
-    $(".workout").append(`<h5>Lower Body<h5>`);
-    lower.forEach(function (lowerBody) {
-        if (lowerBody === undefined) {
-            return $(".lower").append("<h4> No lower body workout </h4>")
-        }
-        $(".workout").append(`<ul>${lowerBody.Exercise}</ul><li>Sets: ${lowerBody.Sets}</li>
-            <li>Reps: ${lowerBody.Reps}</li><li>Lbs: ${lowerBody.Lbs}</li>`);
-    })
-}
+function clickButton(username){
+    $('button').on('click', event=>{
+                event.preventDefault();
+                getProfile(username);
+            });
+        } //how do I get button to actually open another window? in handleNames() I returned the username but then 
+        //couldn't get the data I needed for the routines.
