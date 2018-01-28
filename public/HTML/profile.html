@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="HTML, CSS, JavaScript, jQuery">
     <title>My Fitness Profile</title>
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Montserrat" rel="stylesheet" />
     <link href="/CSS/responsive.css" rel="stylesheet" type="text/css" />
     <link href="/CSS/main.css" rel="stylesheet" type="text/css" />
     <link href="/CSS/profile.css" rel="stylesheet" type="text/css" />
@@ -24,26 +24,48 @@
     <a href="/all-routines">Other Workouts</a>
     <a href="#">Logout</a>
 </nav>
+
 <body>
-    
+
     <main role="main">
         <h1>My Fitness Profile</h1>
         <div class="row create">
-            <section class="col-3">
+            <section class="col-4">
                 <h3>Create New Routine</h3>
+                <form action="/routineList.js">
+                    <fieldset>
+                        <legend>New Workout:</legend>
+                        Body Part
+                        <br>
+                        <select name="upper-or-lower">
+                            <option value="upper">Upper Body</option>
+                            <option value="lower">Lower Body</option>
+                        </select>
+                        <br> Exercise:
+                        <input type="text" name="exercise">
+                        <Br> Sets:
+                        <input type="text" name="sets">
+                        <br> Reps:
+                        <input type="text" name="reps">
+                        <br> Lbs:
+                        <input type="text" name="lbs">
+                        <br>
+                        <input type="submit" value="Submit">
+                    </fieldset>
+                </form>
             </section>
         </div>
         <div class="row list">
-            
+
         </div>
-        
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     </main>
 
 
