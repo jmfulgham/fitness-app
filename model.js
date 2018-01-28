@@ -26,7 +26,7 @@ routineSchema.methods.neaten = function () {
         id: this._id,
         username: this.username,
         name: this.name,
-        date: this.date,
+        date: this.date.toLocaleDateString(),
         upper: this.upper,
         lower: this.lower
     }
