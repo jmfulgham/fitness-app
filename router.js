@@ -6,7 +6,7 @@ const jsonParser = bodyParser.json();
 router.use(morgan('common'));
 const routine = require('./model');
 const mongoose = require('mongoose');
-
+//const form= require('form');
 
 //home page routing
 router.get('/', (req, res) => {
@@ -40,7 +40,7 @@ router.get('/all-routines/', (req,res)=>{
     res.sendFile(__dirname + '/public/HTML/routineList.html');
 }
 )
-router.post('/profile/JSON/:username', jsonParser, (req, res) => {
+router.post('/profile/name/:username', jsonParser, (req, res) => {
     const { name, username, date, upper, lower } = req.body;
     const newRoutine = new routine({ name, username, date, upper, lower });
 
@@ -50,6 +50,7 @@ router.post('/profile/JSON/:username', jsonParser, (req, res) => {
 
         })
         .catch(err => {
+            
             res.status(500).json({
                 error: 'Something went wrong'
             });
@@ -99,6 +100,9 @@ router.delete('/workout/JSON/:id', (req, res) => {
         }));
 });
 
+
+
+
 //routines list for all members
 router.get('/all-routines/JSON', (req, res) => {
     routine
@@ -108,7 +112,8 @@ router.get('/all-routines/JSON', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: "Unable to get all routines"
+                error: "Unable to get all routines",
+                Error: `${err}`
             })
 
         });

@@ -1,4 +1,6 @@
-
+html {
+    background-image: url('../../assets/background2.png');
+}
 row {
     margin: 5px;
     padding: 15px;

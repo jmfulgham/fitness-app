@@ -5,6 +5,8 @@
 //separate data by date to front end
 //create small cards with each workout listed by date
 
+
+
 function getProfileName(username){
     $.ajax({
         type: "GET",

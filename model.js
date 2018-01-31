@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
+
 const routineSchema = mongoose.Schema({
     name: String,
     username: String,
@@ -26,7 +27,7 @@ routineSchema.methods.neaten = function () {
         id: this._id,
         username: this.username,
         name: this.name,
-        date: this.date.toLocaleDateString(),
+        date: this.date,
         upper: this.upper,
         lower: this.lower
     }

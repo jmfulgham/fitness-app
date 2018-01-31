@@ -197,6 +197,25 @@
 //     }
 // ];
 
+
+let workoutDate = "";
+let upperWorkout = "";
+let lowerWorkout = "";
+
+function getAllRoutines() {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:9000/all-routines/JSON/`,
+        dataType: 'json',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        success: function (list) {
+            handleNames(list)
+        }
+    })
+}
+
 function getProfile(username) {
     $ajax({
         type: "GET",
@@ -221,7 +240,7 @@ function getProfile(username) {
             "Content-Type": "application/json"
         },
         success: function (profilesList) {
-            createFullWorkout(profilesList);
+            displayOriginalObject(profilesList);
         }
     })
 }
@@ -235,14 +254,13 @@ function handleNames(list) {
         $(".row").append(`<section class="section col-3 shadow">
         <h3>${name}</h3> <button type="submit"><a href="/profile/name/${username}" target="blank">
         View My Profile</a></button></section>`);
-        //return username;
+
     })
 }
 
 function removeDupes(list) {
     let dupes = [];
     let arr = list.filter(function (oldList) {
-        // If it is not a duplicate, return true
         if (dupes.indexOf(oldList.name) == -1) {
             dupes.push(oldList.name);
             return true;
@@ -253,103 +271,140 @@ function removeDupes(list) {
 }
 
 //// profile API
-function showDateandSections(array) {
-    array.map(function (dates) {
-        let theDate= dates.date;
-        $('.list').append(`<div class="full col-3"><h3>${theDate}</h3>
-        <section class= "upper"><h4>Upper</h4></section><section class= "lower"><h4>Lower</h4></section>
-      </div>`)
-    })
+// let oneDate="";
+// function showOneDate(date){
+//     oneDate += `<div class="full col-3"><h3>${date}</h3>`;
+//     return oneDate;
+// }
+
+
+
+
+
+
+function showOneDate(date) {
+    let newDate = date.toString();
+    console.log(newDate);
+    //expect a string
+    return `<h3>${date}</h3>`;
+    //checked
 }
+
 
 function showOneUpperWorkout(upper) {
+    //expect either an object or undefined
+    let upperWorkout = "";
+
     if (upper === undefined) {
-        return $(".full").append("<h4> No upper body workout </h4>");
+        upperWorkout = upperWorkout + "<h4> No upper body workout </h4>";
+        //checked
+    } else {
+
+        upperWorkout += `
+      <section class="upper">
+        <h4>Upper</h4>
+           <h5>${upper.Exercise}</h5>
+           <ul>
+             <li>Sets: ${upper.Sets}</li>
+             <li>Reps: ${upper.Reps}</li>
+             <li>Lbs: ${upper.Lbs}</li>
+           </ul>
+      </section>`;
     }
-    $(".upper").append(`<ul>${upper.Exercise}</ul><li>Sets: ${upper.Sets}</li>
-            <li>Reps: ${upper.Reps}</li><li>Lbs: ${upper.Lbs}</li>`);
+
+    //checked
+
+    return upperWorkout;
+
 }
 
-function showUpperWorkout(upperArray) {
-    upperArray.forEach(function (upperBody) {
-        showOneUpperWorkout(upperBody)
+function showAllUpperWorkout(uppers) {
+    let result = ''
+    uppers.forEach(function (item) {
+        result = result + showOneUpperWorkout(item); //here its being return and ok now what?
     })
+
+    return result;
+    //checked
 }
-
-//create function to access upper in an object
-//then create a function to access upper in an array of objects
-
-function showOneUpperObj(nestedUpper) {
-    //upper is inside an object
-    //access upper in object using dot notation
-    let upper = nestedUpper.upper;
-    showOneUpperWorkout(upper);
-}
-
-//upper is now inside of an object, with its own array
-function showUpperObj(nestedUpperArray) {
-    let upper = nestedUpperArray.upper;
-    showUpperWorkout(upper);
-}
-
-//now create a function to access upper in an array of upper objects
-
-function showUpperFromArrayObj(arrayOfUppers) {
-    //upper is inside an object
-
-    arrayOfUppers.forEach((listOfUppers)=>{
-        showUpperObj(listOfUppers);
-    })
-}
-
-//now, we need to create lower,
-//then we need to sort with dates
-
-
 
 
 function showOneLowerWorkout(lower) {
-    if (lower === undefined) {
-        return $(".full").append("<h4> No lower body workout </h4>");
+    //expect either an object or undefined
+    let lowerWorkout = "";
+
+    if (lower == undefined) {
+        lowerWorkout = lowerWorkout + "<h4> No lower body workout </h4>";
+        //checked
+    } else {
+
+        lowerWorkout += `
+      <section class="lower">
+        <h4>Lower</h4>
+           <h5>${lower.Exercise}</h5>
+           <ul>
+             <li>Sets: ${lower.Sets}</li>
+             <li>Reps: ${lower.Reps}</li>
+             <li>Lbs: ${lower.Lbs}</li>
+           </ul>
+      </section>`;
     }
-    $(".lower").append(`<ul>${lower.Exercise}</ul><li>Sets: ${lower.Sets}</li>
-            <li>Reps: ${lower.Reps}</li><li>Lbs: ${lower.Lbs}</li>`);
+
+    //checked
+
+    return lowerWorkout;
+
 }
 
-function showLowerWorkout(lowerArray) {
-    lowerArray.forEach(function (lowerBody) {
-        showOneLowerWorkout(lowerBody)
+function showAllLowerWorkout(lowers) {
+    let result = ''
+    lowers.forEach(function (item) {
+        result = result + showOneLowerWorkout(item); //here its being return and ok now what?
+    })
+
+    return result;
+    //checked
+}
+
+function displayOriginalObject(originalObject) {
+    originalObject.forEach(function (item) {
+        let htmlDate = showOneDate(item.date); //return a date 
+        let htmlUpperWorkout = showAllUpperWorkout(item.upper);
+        let htmlLowerWorkout = showAllLowerWorkout(item.lower);
+        let result = htmlDate + htmlUpperWorkout + htmlLowerWorkout;
+        $('.list').append(`<section class="col-4">${result}</section>`);
+    })
+
+}
+
+function postNewWorkout(username) {
+    let bodyPart = $('#upper-or-lower');
+    let exercise = $('#exercise');
+    let sets = $('#sets');
+    let reps = $('#reps');
+    let lbs = $('#lbs');
+    let additionalWorkout = {
+        Exercise: exercise.val(),
+        Sets: sets.val(),
+        Reps: reps.val(),
+        Lbs: lbs.val()
+    }
+    $('button').on('click', event => {
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: `http://localhost:9000/profile/JSON/${username}`,
+            data: additionalWorkout,
+            dataType: "json",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            success: function (newWorkout) {
+                $('.create').append(`<section class="col-4"><h4>Workout Saved</h4></section>`);
+            },
+            error: function () {
+                alert("Error saving workout");
+            }
+        })
     })
 }
-
-
-function showOneLowerObj(nestedLower) {
-    //Lower is inside an object
-    //access Lower in object using dot notation
-    let lower = nestedLower.lower;
-    showOneLowerWorkout(lower);
-}
-
-//lower is now inside of an object, with its own array
-function showLowerObj(nestedLowerArray) {
-    let lower = nestedLowerArray.lower;
-    showLowerWorkout(lower);
-}
-
-//now create a function to access lower in an array of lower objects
-
-function showLowerFromArrayObj(arrayOfLowers) {
-    //Lower is inside an object
-
-    arrayOfLowers.forEach((listOfLowers) => {
-        showLowerObj(listOfLowers);
-    })
-}
-
-
-function createFullWorkout(profilesList) {
-    showDateandSections(profilesList);
-    showUpperFromArrayObj(profilesList);
-    showLowerFromArrayObj(profilesList);
-}
-
