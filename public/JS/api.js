@@ -78,9 +78,9 @@ function postInfo() {
             headers: {
                 "Content-Type": "application/json"
             },
-            success: function () {
+            success: function (dates, bodyParts,workoutDetails) {
                 $(".create").append(`<section class="col-4"><h4>Workout Saved</h4></section>`);
-                //console.log(displayNewWorkout(dates, bodyParts, workoutDetails));
+                location.reload();
                 
             },
             error: function (req) {
@@ -98,6 +98,10 @@ function displayNewWorkout(dates, bodyParts, workoutDetails){
     <ul><li>${workoutDetails}</li></section>`);
 }
 
+
+function addEditButton(){
+
+}
 
 $(document).ready(function () {
     postInfo()

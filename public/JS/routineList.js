@@ -74,7 +74,7 @@ function removeDupes(list) {
 
 
 function showOneDate(date) {
-    let newDate = date.toString();
+    
     return `<h3>${date}</h3>`;
 }
 
