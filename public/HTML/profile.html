@@ -15,17 +15,18 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="/JS/routineList.js" type="text/javascript"></script>
+    <script src="/JS/api.js" type="text/javascript"></script>
     <script>
-        getProfile(window.location.pathname.split('/')[3]);
+        getJSONProfile(window.location.pathname.split('/')[3]);
     </script>
-    <script>
-        postNewWorkout(window.location.pathname.split('/')[3]);
-    </script>
+    <!-- <script>
+        postInfo();
+    </script> -->
 </head>
 <nav role="navigation" class="nav">
     <a href="/">Home</a>
     <a href="/all-routines">Other Workouts</a>
-    <a href="#">Logout</a>
+    <a href="/">Logout</a>
 </nav>
 
 <body>
@@ -39,23 +40,24 @@
                     <fieldset>
                         <legend>New Workout:</legend>
                         Date:
-                        <input type="text" name="date" required>
+                        <input type="text" name="date" id="date" required>
                         <br>Body Part
                         <br>
                         <select name="upper-or-lower" id="upper-or-lower">
                             <option value="upper">Upper Body</option>
                             <option value="lower">Lower Body</option>
                         </select>
-                        <br> Exercise:
+                         <br> Exercise:
                         <input type="text" name="exercise" id="exercise" required>
                         <Br> Sets:
-                        <input type="text" name="sets" id="sets"required>
+                        <input type="text" name="sets" id="sets" required>
                         <br> Reps:
-                        <input type="text" name="reps" id="reps"required>
+                        <input type="text" name="reps" id="reps" required>
                         <br> Lbs:
-                        <input type="text" name="lbs" id="lbs"required>
-                        <br>    
-                        <button type="submit" value="submit">Submit</button>
+                        <input type="text" name="lbs" id="lbs" required>
+                        <br>
+                        <button type="button" value="add" id="add">Add More</button>
+                        <button type="submit" value="submit" id ="submit">Submit</button>
                     </fieldset>
                 </form>
             </section>

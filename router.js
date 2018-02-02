@@ -22,7 +22,7 @@ router.get('/profile/JSON/:username', (req, res) => {
         .then(profile => {
 
             res.json(profile.map(list => list.neaten()))
-            
+
         })
         .catch(err => {
             res.status(500).json({
@@ -32,25 +32,35 @@ router.get('/profile/JSON/:username', (req, res) => {
         });
 });
 
-router.get('/profile/name/:username', (req,res)=>{
+router.get('/profile/name/:username', (req, res) => {
     res.sendFile(__dirname + '/public/HTML/profile.html');
 })
 
-router.get('/all-routines/', (req,res)=>{
+router.get('/all-routines/', (req, res) => {
     res.sendFile(__dirname + '/public/HTML/routineList.html');
-}
-)
-router.post('/profile/name/:username', jsonParser, (req, res) => {
-    const { name, username, date, upper, lower } = req.body;
-    const newRoutine = new routine({ name, username, date, upper, lower });
+})
+router.post('/profile/JSON/:username', jsonParser, (req, res) => {
+    // const {
+    //     name,
+    //     username,
+    //     date,
+    //     upper,
+    //     lower
+    // } = req.body;
 
+    const newRoutine = new routine({
+      
+                name: req.body.name,
+                username: req.body.username,
+                date: req.body.date,
+                upper: req.body.upper,
+                lower: req.body.lower
+            })
     newRoutine.save()
         .then(newRoutine => {
             res.status(201).json(newRoutine.neaten());
-
         })
         .catch(err => {
-            
             res.status(500).json({
                 error: 'Something went wrong'
             });
