@@ -78,9 +78,10 @@ function postInfo() {
             headers: {
                 "Content-Type": "application/json"
             },
-            success: function (dates, bodyParts,workoutDetails) {
+            success: function () {
                 $(".create").append(`<section class="col-4"><h4>Workout Saved</h4></section>`);
                 location.reload();
+            
                 
             },
             error: function (req) {
