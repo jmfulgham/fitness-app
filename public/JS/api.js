@@ -1,14 +1,5 @@
 'use strict';
 
-
-
-//user enters date into client
-//user hit submit button
-//server recieves the username from the URL
-//need the name
-//server recieves the date in the POST request
-//server saves username with corresponding date entry
-
 let date = "";
 
 function getWorkoutDate() {
@@ -41,9 +32,6 @@ function getExercise() {
     };
     return workout;
 }
-// "username" : "${username}","${bodyPart}":[{
-// "${workoutDetails}"
-//                 }]
 
 function formReset() {
     $("input[name='date']").empty()
@@ -100,10 +88,15 @@ function displayNewWorkout(dates, bodyParts, workoutDetails){
 }
 
 
-function addEditButton(){
-
-}
-
+//fields allow me to edit
+//button changes to save
+//after we click save, need to submit PUT request with workout ID
+//how to submit PUT request- with AJAX request
+//pull data from text and send to PUT request- how and why - jQuery?
+//var content = $('.contenteditable').html();
+//save new data to a variable then send to PUT
+//PUT to '/workout/JSON/:id'
+//
 $(document).ready(function () {
     postInfo()
 })

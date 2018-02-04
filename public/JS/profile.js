@@ -8,10 +8,10 @@ let id;
 function storeId (id){
     let _id = id["id"];
 }
-function showOneDate(date) {
-    return `<h3>${date}</h3>`;
-}
 
+function showOneDate(date) {
+    return `<h3>${moment(date).format("MMM Do YY")}</h3>`;
+}
 
 function showOneUpperWorkout(upper, setColumn) {
     console.log(setColumn);
@@ -76,29 +76,29 @@ function showAllLowerWorkout(lowers, setColumn) {
     return result;
 }
 
-
 function displayOriginalObject(originalObject) {
     let edit;
     let setColumn;
     let del;
+    console.log("Here is the original object: ", JSON.stringify(originalObject));
+    console.log("Here is the ids?: ", originalObject.map(i => i.id));
     originalObject.forEach(function (item, index) {
         let htmlDate = showOneDate(item.date);
         let htmlUpperWorkout = showAllUpperWorkout(item.upper, `setColumn${index}`);
         let htmlLowerWorkout = showAllLowerWorkout(item.lower, `setColumn${index}`);
-        // let buttons = addEditButton();
-        // console.log(buttons);
         let result = htmlDate + htmlUpperWorkout + htmlLowerWorkout;
         $('.list').append(`<section class="col-4">${result}<button type="button" value="edit" class="edit${index}">Edit</button>
         <button type="button" value="delete" class="delete${index}">Delete</button></section>`);
         edit = `.edit${index}`;
         setColumn = `.setColumn${index}`;
-        del = `.delete${index}`;
-        //console.log(`.setColumn${index}`);
+        del = `.delete${index}` 
         handleEdit(edit, setColumn);
-        handleDelete(id, del);
+        handleDelete(item.id, del);
     })
 
 }
+
+
 
 function handleEdit(classButton, classSetColumn) {
     console.log('edit')
@@ -136,12 +136,7 @@ function handleDelete(id, del) {
         })
 
     })
-    //retrieve the ID of this workout
-    //is this a get request?
-    //how do I send ID from all-routines?
-
-    //send DELETE request
-    //display "Delete Successful" message when done
+   
     
 }
 
@@ -173,24 +168,12 @@ function getJSONProfile(username) {
         },
         success: function (profilesList) {
             displayOriginalObject(profilesList);
-            getObjId(profilesList);
+            
             
         }
     })
 }
 
-//getjsonprofile
-//gives me every workout under each specific profile
-//each workout has an ID that's not stored or displayed
-//get id from every workout in json list without having to display it on the front end
-//store information
-//delete request on click
 
 
 
-function getObjId(arrOb){
-    arrOb.forEach(function(obj){
-        id= obj.id;
-        return id;
-    })
-}
