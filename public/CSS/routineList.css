@@ -1,5 +1,8 @@
 html {
-    background-image: url('../../assets/background2.png');
+    background-image: url('../../assets/routines2.png');
+    background-size: cover;
+     background-repeat: no-repeat;
+     /* background-color: #cc17a0; */
 }
 row {
     margin: 5px;

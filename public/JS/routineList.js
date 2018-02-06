@@ -22,20 +22,21 @@ function getAllRoutines() {
 function handleNames(list) {
     let newList = removeDupes(list);
     newList.map(function (shortList) {
-        let name = shortList.name;
+        // let name = shortList.name;
         let username = shortList.username;
         $(".row").append(`<section class="section col-3 shadow">
-        <h3>${name}</h3><button onclick="window.location.href = '/profile/name/${username}';">
+        <h3>${username}</h3><button onclick="window.location.href = '/profile/name/${username}';">
         View My Profile</button></section>`);
-        
+        // showName(username);
+
     })
 }
 
 function removeDupes(list) {
     let dupes = [];
     let arr = list.filter(function (oldList) {
-        if (dupes.indexOf(oldList.name) == -1) {
-            dupes.push(oldList.name);
+        if (dupes.indexOf(oldList.username) == -1) {
+            dupes.push(oldList.username);
             return true;
         }
         return false;
@@ -43,5 +44,7 @@ function removeDupes(list) {
     return arr;
 }
 
+
+//send name to the profile
 
 

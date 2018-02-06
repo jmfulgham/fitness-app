@@ -37,6 +37,7 @@ nav > a {
     color: white;
     text-decoration: none;
     line-height: 40px;
+    padding:10px;
 }
 
 body {
@@ -70,4 +71,8 @@ color: white;
     -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
+}
+
+li {
+    list-style: none;
 }

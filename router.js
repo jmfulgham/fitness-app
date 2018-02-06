@@ -40,26 +40,24 @@ router.get('/all-routines/', (req, res) => {
     res.sendFile(__dirname + '/public/HTML/routineList.html');
 })
 router.post('/profile/JSON/:username', jsonParser, (req, res) => {
-    // const {
-    //     name,
-    //     username,
-    //     date,
-    //     upper,
-    //     lower
-    // } = req.body;
+    const {
+        name,
+        username,
+        date,
+        upper,
+        lower
+    } = req.body;
 
     const newRoutine = new routine({
-      
-                name: req.body.name,
                 username: req.body.username,
                 date: req.body.date,
                 upper: req.body.upper,
                 lower: req.body.lower
             })
     newRoutine.save()
-        .then(newRoutine => {
-            res.status(201).json(newRoutine.neaten());
-        })
+        .then(newRoutine => 
+            res.status(201).json(newRoutine.neaten())
+        )
         .catch(err => {
             res.status(500).json({
                 error: 'Something went wrong'
