@@ -188,11 +188,11 @@ function handleEdit(classButton, classSetColumn) {
 //then create function that creates the PUT ajax request, with the ID
 
 function handleSave(classButton, classSetColumn){
-    
-    let firstChild = $(classSetColumn, "ul li:nth-child(1)").text();
+    // console.log("button ",classButton, "column ", classSetColumn);
+    let firstChild = $(`${classSetColumn} ul li:nth-child(1)`).text();
 console.log("I was clicked ", firstChild);
-//text isn't formatted correctly
-//need to format so that we can send 
-//with the right fields like "Exercise:"
-//can we 
+//need firstChild to know which section I'm clicking with
+//classSetColumn. how do i specifiy which section I'm clicking and which ul li: I want?
 }
+
+
