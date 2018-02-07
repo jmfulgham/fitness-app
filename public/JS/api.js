@@ -21,7 +21,6 @@ let lbs = "";
 
 function getExercise() {
     exercise = exercise + $("input[name='exercise']").val();
-    console.log('exercise, ', exercise);
     reps = reps + $("input[name='reps']").val();
     sets = sets + $("input[name='sets']").val();
     lbs = lbs + $("input[name='lbs']").val();

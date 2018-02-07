@@ -62,6 +62,36 @@ function handleDelete(id, del) {
     })
 }
 
+// function handlePut(id, updatedWorkout, classSetColumn) {
+//     // console.log("ready to delete");
+//     $(classSetColumn).on("click", event => {
+//         console.log("You clicked delete", id);
+//         $.ajax({
+//             type: "PUT",
+//             url: `http://localhost:9000/workout/JSON/${id}`,
+//             data: `{
+//             "username" : ${username},
+//                 "date" : ${dates},
+//                 ${bodyParts}: [ ${workoutDetails}]
+//             }`,
+//             dataType: "json",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             success: function () {
+//                 $(".create").append(`<section class="col-4"><h4>Workout Saved</h4></section>`);
+//                 location.reload();
+//             },
+//             error: function (req) {
+//                 console.log(req.body);
+//                 alert("Error saving workout");
+
+//         }
+//         })
+
+//     })
+// }
+
 //////////////////////////////////
 
 
@@ -162,7 +192,7 @@ function handleEdit(classButton, classSetColumn) {
         // console.log(isEditable);
         // console.log(classSetColumn);
         isEditable ? $(classButton).text('Edit') : $(classButton).text('Save');
-        handleSave(classButton, classSetColumn);
+        handleSave(classSetColumn);
     })
 
 }
@@ -187,12 +217,19 @@ function handleEdit(classButton, classSetColumn) {
 //first create a click function that stores the values from the new text fields
 //then create function that creates the PUT ajax request, with the ID
 
-function handleSave(classButton, classSetColumn){
+function handleSave(classSetColumn){
     // console.log("button ",classButton, "column ", classSetColumn);
-    let firstChild = $(`${classSetColumn} ul li:nth-child(1)`).text();
-console.log("I was clicked ", firstChild);
-//need firstChild to know which section I'm clicking with
-//classSetColumn. how do i specifiy which section I'm clicking and which ul li: I want?
+    let newExercise = $("h5" + classSetColumn).text();
+    let firstChild = $("ul li:nth-child(1)" + classSetColumn ).text();
+    let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
+    let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
+    let testObj = {};
+    testObj= "Exercise" + ": " + newExercise +","+  firstChild +"," + secondChild +","+ thirdChild;
+    console.log(testObj);
+//object is ALMOST in JSON format
+//need " " around every key value 
+//tried JSON.stringify but only sets to one large string. 
+//once I figure out how to finish formatting the object to a JSON object, then I will pass the final object to the handlePUT request
 }
 
 
