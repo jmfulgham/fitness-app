@@ -82,14 +82,16 @@ router.get('/workout/JSON/:id', (req, res) => {
 });
 
 router.put('/workout/JSON/:id', jsonParser, (req, res) => {
-
-    let toUpdate = {}
+console.log(req.body);
+    // let toUpdate = {}
     routine
         .findByIdAndUpdate(req.params.id, req.body, {
-            $set: toUpdate
+            $set: req.body
         })
+        
         .then(updatedList => {
-            res.status(204).end()
+            console.log("Updated", updatedList);
+            res.send(updatedList).status(204);
         })
         .catch(err => {
             res.status(500).json({
