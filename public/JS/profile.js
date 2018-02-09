@@ -85,7 +85,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
             "Content-Type": "application/json"
         },
         success: function () {
-            $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Edited</h4></section>`);
+            $(".create").append(`<section class="col-4" aria-live="polite"><h4>Saved</h4></section>`);
         },
         error: function (err, req) {
             console.log("err", err, req);
@@ -210,8 +210,10 @@ function handleSave(classSetColumn, classButton, id) {
     let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
     let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
     if (firstChild || secondChild || thirdChild === null) {
-        alert("Please enter a number");
+        $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter a number</h4></section>`);
+        return "done";
     }
+    
     convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
 }
 
