@@ -66,7 +66,7 @@ function postInfo() {
                 "Content-Type": "application/json"
             },
             success: function () {
-                $(".create").append(`<section class="col-4"><h4>Workout Saved</h4></section>`);
+                $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Saved</h4></section>`);
                 location.reload();
             },
             error: function (req) {

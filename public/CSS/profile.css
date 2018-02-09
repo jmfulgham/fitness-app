@@ -1,19 +1,18 @@
-html{
-    background-image:url('../../assets/background2.png');
-   background-size:cover;
-   background-repeat: no-repeat;
-    
+html {
+    background-image: url('../../assets/background2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
 .editable {
     background: #EAEAEA
 }
 
-input:focus{
-    border-color:purple;
+input:focus {
+    border-color: purple;
 }
 
-input{
-    display:block;
-    width:150px;
-  
+input {
+    display: block;
+    width: 150px;
 }

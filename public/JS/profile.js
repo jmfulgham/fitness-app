@@ -55,7 +55,7 @@ function handleDelete(id, del) {
                 "Content-Type": "application/json"
             },
             success: function () {
-                $(".create").append(`<section class="col-4"><h4>Workout Deleted</h4></section>`);
+                $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Deleted</h4></section>`);
                 location.reload();
             },
             error: function () {
@@ -89,7 +89,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
             "Content-Type": "application/json"
         },
         success: function () {
-            $(".create").append(`<section class="col-4"><h4>Workout Edited</h4></section>`);
+            $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Edited</h4></section>`);
             // location.reload();
         },
         error: function (err, req) {
@@ -103,7 +103,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
 //////////////////////////////////
 
 function showOneDate(date, setColumn) {
-    return `<h3 class=${setColumn}">${moment(date).format("MMM Do YY")}</h3>`;
+    return `<h3 class=${setColumn}">${moment(date).add(1,day).format("MMM Do YY")}</h3>`;
 }
 
 function showOneUpperWorkout(upper, setColumn) {
@@ -174,7 +174,7 @@ function displayOriginalObject(originalObject) {
         let htmlUpperWorkout = showAllUpperWorkout(item.upper, `setColumn${index}`);
         let htmlLowerWorkout = showAllLowerWorkout(item.lower, `setColumn${index}`);
         let result = htmlDate + htmlUpperWorkout + htmlLowerWorkout;
-        $('.list').append(`<section class="col-4">${result}<button type="button" value="edit" class="edit${index}">Edit</button>
+        $('.list').append(`<section class="col-4" aria-live="polite">${result}<button type="button" value="edit" class="edit${index}">Edit</button>
         <button type="button" value="delete" class="delete${index}">Delete</button></section>`);
         edit = `.edit${index}`;
         setColumn = `.setColumn${index}`;
