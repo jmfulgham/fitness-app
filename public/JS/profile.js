@@ -9,8 +9,8 @@ let upperWorkout = "";
 let lowerWorkout = "";
 let id;
 let newObject;
-
-
+let newPart;
+let classButtonSave;
 //////////////////////////////////      API requests
 
 function getProfile(username) {
@@ -66,35 +66,37 @@ function handleDelete(id, del) {
     })
 }
 //check Event Handlers
-function handlePut(id, newObject, newPart , classButton) {
-     console.log("ready to put", id, newObject, classButton, newPart);
-     let bodyPart= JSON.stringify(newPart);
-     let replacementWorkout= JSON.stringify(newObject);
-    $(classButton).on("click", event => {
-        console.log("You put ", id);
-        $.ajax({
-            type: "PUT",
-            url: `http://localhost:9000/workout/JSON/${id}`,
-            data: `{ 
+
+function handlePut(id, classButtonSave, newObject, newPart) {
+    console.log("before the PUT", id, newObject, newPart, classButtonSave);
+    let parts= newPart.toLowerCase();
+    console.log("parts ", parts);
+    let bodyPart = JSON.stringify(parts);
+    let replacementWorkout = JSON.stringify(newObject);
+    console.log("modified", id, bodyPart , replacementWorkout );
+    // $(`button${classButtonSave}.save`).on("click", event => {
+    //     console.log("AFTER the PUT", id, replacementWorkout, bodyPart);
+    $.ajax({
+        method: "PUT",
+        url: `http://localhost:9000/workout/JSON/${id}`,
+        data: `{ 
                 ${bodyPart} :[
                      ${replacementWorkout}
                 ]
             }`,
-            dataType: "json",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            success: function () {
-                $(".create").append(`<section class="col-4"><h4>Workout Edited</h4></section>`);
-                // location.reload();
-            },
-            error: function (err, req) {
-                console.log("err", err, req.body);
-                alert("Error editing workout");
+        dataType: "json",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        success: function () {
+            $(".create").append(`<section class="col-4"><h4>Workout Edited</h4></section>`);
+            // location.reload();
+        },
+        error: function (err, req) {
+            console.log("err", err, req);
+            alert("Error editing workout");
 
-            }
-        })
-
+        }
     })
 }
 
@@ -178,7 +180,8 @@ function displayOriginalObject(originalObject) {
         setColumn = `.setColumn${index}`;
         del = `.delete${index}`;
         handleEdit(edit, setColumn, item.id);
-        handleDelete(item.id, del);  
+        handleDelete(item.id, del);
+
     })
 
 }
@@ -186,25 +189,39 @@ function displayOriginalObject(originalObject) {
 
 function handleEdit(classButton, classSetColumn, id) {
     $(classButton).on('click', event => {
+        console.log(" 1 handleEdit triggered")
         let isEditable = $(classSetColumn).is('.editable');
         $(classSetColumn).prop('contenteditable', !isEditable);
         $(classSetColumn).toggleClass('editable');
         isEditable ? $(classButton).text('Edit') : $(classButton).text('Save');
-        handleSave(classSetColumn, classButton, id);
-        
+        $(classButton).toggleClass('save');
+        console.log(id);
+        triggerSave(classSetColumn, classButton, id);
     })
-    
+    console.log("handleEdit done")
+    //handleSave(classSetColumn, classButton, id)
+}
+//handlesave needs to be called outside of edit so handlesave doesn't save the input already in the fields
+//another function to handle the click function?
+function triggerSave(classSetColumn, classButton, id) {
+    $(`button${classButton}.save`).on("click", event => {
+        console.log("Trigger triggered");
+        handleSave(classSetColumn, classButton, id)
+    })
 }
 
-
 function handleSave(classSetColumn, classButton, id) {
-    let newPart = $("h4" + classSetColumn).text();
+    console.log("2 handleSave triggered");
+    classButtonSave = classButton;
+    console.log("CBS was clicked ", classButtonSave);
+    newPart = $("h4" + classSetColumn).text();
     let newExercise = $("h5" + classSetColumn).text();
     let firstChild = $("ul li:nth-child(1)" + classSetColumn).text();
     let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
     let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
-    convertToObj(newExercise, firstChild, secondChild, thirdChild);
-    handlePut(id, newObject, newPart, classButton);//s we want PUT to happen after "save" has been triggered
+    convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
+    console.log("object conversion complete");
+    console.log("handleSave done");
 }
 
 //figure out the best place to put handlePut so that it gets all the variables  
@@ -216,7 +233,7 @@ function handleSave(classSetColumn, classButton, id) {
 //hopefully "save" can eliminate this fear
 
 
-function convertToObj(newExercise, firstChild, secondChild, thirdChild) {
+function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     const re = /\d/;
     let sets;
     let reps;
@@ -225,19 +242,23 @@ function convertToObj(newExercise, firstChild, secondChild, thirdChild) {
     reps = secondChild.match(re)[0];
     let reps2 = secondChild.match(re)["input"];
     let reps3 = reps2.slice(6);
-    lbs = thirdChild.match(re)[0]; 
+    lbs = thirdChild.match(re)[0];
     let lbs2 = thirdChild.match(re)["input"];
     let lbs3 = lbs2.slice(5);
-    
-   
+
+
     sets = parseInt(sets, 10);
     reps = parseInt(reps3, 10);
     lbs = parseInt(lbs3, 10);
-   
-     newObject = {
+
+    newObject = {
         "Exercise": newExercise,
         Sets: sets,
         Reps: reps,
-        Lbs: lbs}
-    return newObject;
+        Lbs: lbs
+    }
+    console.log("object converted, ", newObject)
+    console.log("sent to PUT")
+    handlePut(id, classButtonSave, newObject, newPart) //s we want PUT to happen after "save" has been triggered
+    console.log("PUT triggered");
 }
