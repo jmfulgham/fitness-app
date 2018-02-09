@@ -16,7 +16,6 @@ app.use(morgan('common'));
 
 //templating engine set up 
 
-app.set('view engine', 'pug') 
 //enivornment setup
 const { PORT, DATABASE_URL } = require('./config');
 
@@ -48,7 +47,6 @@ function closeServer(){
         server.close(err => {
             if (err) {
                 reject(err);
-                // so we don't also call `resolve()`
                 return;
             }
             resolve();
@@ -57,7 +55,6 @@ function closeServer(){
 }
 
 if (require.main === module) {
-    //   this means we're starting the server from the command line.
     runServer().catch(err => console.error(err));
 };
 

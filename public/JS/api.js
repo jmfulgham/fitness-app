@@ -35,7 +35,6 @@ function getExercise() {
 
 function formReset() {
     $("input[name='date']").empty()
-    //$("select[name='upper-or-lower']").empty()
     $("input[name='exercise']").empty();
     $("input[name='reps']").empty();
     $("input[name='sets']").empty();
@@ -50,9 +49,7 @@ function postInfo() {
         let dates = JSON.stringify(getWorkoutDate());
         let bodyParts = JSON.stringify(getBodyPart());
         let workoutDetails = JSON.stringify(getExercise());
-        console.log("le date ", dates, "le body ", bodyParts, "le work ", workoutDetails);
         let username = JSON.stringify(window.location.pathname.split("/")[3]);
-        console.log("clicked", username);
         $.ajax({
             type: "POST",
             url: `https://fierce-springs-45667.herokuapp.com/profile/JSON/${username}`,
@@ -70,9 +67,7 @@ function postInfo() {
                 location.reload();
             },
             error: function (req) {
-                console.log(req.body);
                 alert("Error saving workout");
-
             }
         })
     })

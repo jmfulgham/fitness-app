@@ -6,7 +6,6 @@ const jsonParser = bodyParser.json();
 router.use(morgan('common'));
 const routine = require('./model');
 const mongoose = require('mongoose');
-//const form= require('form');
 
 //home page routing
 router.get('/', (req, res) => {
@@ -15,7 +14,6 @@ router.get('/', (req, res) => {
 
 //profile page
 router.get('/profile/JSON/:username', (req, res) => {
-    //change all profile/name/... to profile/JSON
     routine.find({
             username: req.params.username
         })
@@ -49,13 +47,13 @@ router.post('/profile/JSON/:username', jsonParser, (req, res) => {
     } = req.body;
 
     const newRoutine = new routine({
-                username: req.body.username,
-                date: req.body.date,
-                upper: req.body.upper,
-                lower: req.body.lower
-            })
+        username: req.body.username,
+        date: req.body.date,
+        upper: req.body.upper,
+        lower: req.body.lower
+    })
     newRoutine.save()
-        .then(newRoutine => 
+        .then(newRoutine =>
             res.status(201).json(newRoutine.neaten())
         )
         .catch(err => {
@@ -82,8 +80,7 @@ router.get('/workout/JSON/:id', (req, res) => {
 });
 
 router.put('/workout/JSON/:id', jsonParser, (req, res) => {
-     let toUpdate = req.body;
-     console.log("Le update", toUpdate);
+    let toUpdate = req.body;
     routine
         .findByIdAndUpdate(req.params.id, toUpdate, {
             $set: toUpdate
@@ -91,7 +88,6 @@ router.put('/workout/JSON/:id', jsonParser, (req, res) => {
         .then(updatedList => {
             console.log("Updated", updatedList);
             res.send(updatedList).status(204);
-            console.log("After di update, ", updatedList);
         })
         .catch(err => {
             res.status(500).json({

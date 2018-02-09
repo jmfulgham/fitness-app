@@ -44,7 +44,6 @@ function getJSONProfile(username) {
 }
 
 function handleDelete(id, del) {
-    // console.log("ready to delete");
     $(del).on("click", event => {
         console.log("You clicked delete", id);
         $.ajax({
@@ -65,17 +64,14 @@ function handleDelete(id, del) {
 
     })
 }
-//check Event Handlers
 
 function handlePut(id, classButtonSave, newObject, newPart) {
     console.log("before the PUT", id, newObject, newPart, classButtonSave);
-    let parts= newPart.toLowerCase();
+    let parts = newPart.toLowerCase();
     console.log("parts ", parts);
     let bodyPart = JSON.stringify(parts);
     let replacementWorkout = JSON.stringify(newObject);
-    console.log("modified", id, bodyPart , replacementWorkout );
-    // $(`button${classButtonSave}.save`).on("click", event => {
-    //     console.log("AFTER the PUT", id, replacementWorkout, bodyPart);
+    console.log("modified", id, bodyPart, replacementWorkout);
     $.ajax({
         method: "PUT",
         url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
@@ -90,7 +86,6 @@ function handlePut(id, classButtonSave, newObject, newPart) {
         },
         success: function () {
             $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Edited</h4></section>`);
-            // location.reload();
         },
         error: function (err, req) {
             console.log("err", err, req);
@@ -107,7 +102,6 @@ function showOneDate(date, setColumn) {
 }
 
 function showOneUpperWorkout(upper, setColumn) {
-    // console.log(setColumn);
     let upperWorkout = "";
     if (upper === undefined || null) {
         upperWorkout = upperWorkout + "<h4> No upper body workout </h4>";
@@ -189,20 +183,16 @@ function displayOriginalObject(originalObject) {
 
 function handleEdit(classButton, classSetColumn, id) {
     $(classButton).on('click', event => {
-        console.log(" 1 handleEdit triggered")
         let isEditable = $(classSetColumn).is('.editable');
         $(classSetColumn).prop('contenteditable', !isEditable);
         $(classSetColumn).toggleClass('editable');
         isEditable ? $(classButton).text('Edit') : $(classButton).text('Save');
         $(classButton).toggleClass('save');
-        console.log(id);
         triggerSave(classSetColumn, classButton, id);
     })
     console.log("handleEdit done")
-    //handleSave(classSetColumn, classButton, id)
 }
-//handlesave needs to be called outside of edit so handlesave doesn't save the input already in the fields
-//another function to handle the click function?
+
 function triggerSave(classSetColumn, classButton, id) {
     $(`button${classButton}.save`).on("click", event => {
         console.log("Trigger triggered");
@@ -211,26 +201,17 @@ function triggerSave(classSetColumn, classButton, id) {
 }
 
 function handleSave(classSetColumn, classButton, id) {
-    console.log("2 handleSave triggered");
     classButtonSave = classButton;
-    console.log("CBS was clicked ", classButtonSave);
     newPart = $("h4" + classSetColumn).text();
+    //if newPart is blank, null or undefined, send message
     let newExercise = $("h5" + classSetColumn).text();
     let firstChild = $("ul li:nth-child(1)" + classSetColumn).text();
     let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
     let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
     convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
-    console.log("object conversion complete");
-    console.log("handleSave done");
 }
 
-//figure out the best place to put handlePut so that it gets all the variables  
-//it needs without being called too many times 
-//and check if the PUT function
-//needs to be changed so that instead of the 
-//classButton being the trigger, it's the "save" toggle. classButton may not need to be an argument
-//but ID is a concern
-//hopefully "save" can eliminate this fear
+
 
 
 function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
@@ -250,7 +231,7 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     sets = parseInt(sets, 10);
     reps = parseInt(reps3, 10);
     lbs = parseInt(lbs3, 10);
-
+    //if sets reps lbs is null or undefined, send a message
     newObject = {
         "Exercise": newExercise,
         Sets: sets,
@@ -259,6 +240,6 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     }
     console.log("object converted, ", newObject)
     console.log("sent to PUT")
-    handlePut(id, classButtonSave, newObject, newPart) //s we want PUT to happen after "save" has been triggered
+    handlePut(id, classButtonSave, newObject, newPart) 
     console.log("PUT triggered");
 }

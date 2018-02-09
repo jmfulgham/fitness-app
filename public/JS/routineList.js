@@ -22,12 +22,10 @@ function getAllRoutines() {
 function handleNames(list) {
     let newList = removeDupes(list);
     newList.map(function (shortList) {
-        // let name = shortList.name;
         let username = shortList.username;
         $(".row").append(`<section class="section col-3 shadow">
         <h3>${username}</h3><button onclick="window.location.href = '/profile/name/${username}';">
         View My Profile</button></section>`);
-        // showName(username);
 
     })
 }
@@ -45,6 +43,5 @@ function removeDupes(list) {
 }
 
 
-//send name to the profile
 
 
