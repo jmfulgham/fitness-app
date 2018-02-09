@@ -232,6 +232,10 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     reps = parseInt(reps3, 10);
     lbs = parseInt(lbs3, 10);
     //if sets reps lbs is null or undefined, send a message
+    if (sets || reps || lbs == null || undefined){
+        alert("Please enter a number");
+    }
+    
     newObject = {
         "Exercise": newExercise,
         Sets: sets,
