@@ -23,7 +23,7 @@ function handleNames(list) {
     let newList = removeDupes(list);
     newList.map(function (shortList) {
         let username = shortList.username;
-        $(".row").append(`<section class="section col-3 shadow">
+        $(".row").append(`<section class="section col-4 shadow">
         <h3>${username}</h3><button onclick="window.location.href = '/profile/name/${username}';">
         View My Profile</button></section>`);
 
