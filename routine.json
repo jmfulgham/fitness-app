@@ -1,5 +1,5 @@
 [{
-        "name": "Willy Warm-Up",
+       
         "username": "ww404",
         "date": "1.10.18",
         "upper": [{
@@ -7,28 +7,14 @@
                 "Sets": 4,
                 "Reps": 10,
                 "Lbs": 150
-            },
-
-            {
-                "Exercise": "Chest Fly",
-                "Sets": 3,
-                "Reps": 12,
-                "Lbs": 120
-            },
-
-            {
-                "Exercise": "Shoulder Press",
-                "Sets": 4,
-                "Reps": 10,
-                "Lbs": 100
-            }
+        }
         ],
         "lower": [{
             
         }]
 },
 {
-        "name": "Linda Legs",
+        
         "username": "leggy_linda01",
         "date": "1.23.18",
         "upper": [
@@ -47,7 +33,6 @@
         ]
 } ,
 {
-    "name": "Teddy Test",
     "username": "test813",
     "date": "1.10.18",
     "upper": [
