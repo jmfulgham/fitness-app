@@ -83,15 +83,15 @@ router.get('/workout/JSON/:id', (req, res) => {
 
 router.put('/workout/JSON/:id', jsonParser, (req, res) => {
      let toUpdate = req.body;
-     console.log("Le update", toUpdate)
+     console.log("Le update", toUpdate);
     routine
         .findByIdAndUpdate(req.params.id, toUpdate, {
             $set: toUpdate
         })
-        
         .then(updatedList => {
             console.log("Updated", updatedList);
             res.send(updatedList).status(204);
+            console.log("After di update, ", updatedList);
         })
         .catch(err => {
             res.status(500).json({
