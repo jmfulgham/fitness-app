@@ -42,7 +42,7 @@ describe('Testing CRUD', function () {
 
     it('should create a new routine on POST', () => {
         const newRoutine = {
-            "name": "Willy Warm-Up",
+           
             "username": "ww404",
             "date": "1.10.18",
             "upper": [{
@@ -89,7 +89,7 @@ describe('Testing CRUD', function () {
                 res.should.have.status(201);
                 res.should.be.json;
                 res.body.should.be.an('object');
-                res.body.should.include.keys('name', 'username', 'date', 'upper', 'lower');
+                res.body.should.include.keys('username', 'date', 'upper', 'lower');
             });
     });
 
