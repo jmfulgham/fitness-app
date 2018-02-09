@@ -103,7 +103,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
 //////////////////////////////////
 
 function showOneDate(date, setColumn) {
-    return `<h3 class=${setColumn}">${moment(date).add(1,day).format("MMM Do YY")}</h3>`;
+    return `<h3 class=${setColumn}">${moment(date).add(1,'day').format("MMM Do YY")}</h3>`;
 }
 
 function showOneUpperWorkout(upper, setColumn) {
