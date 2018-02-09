@@ -39,4 +39,7 @@
         width:100%
     }
 }
-
+@media (min-width: 300px) and (max-width: 640px) {
+    .col-4{
+        width: 100%
+    }
