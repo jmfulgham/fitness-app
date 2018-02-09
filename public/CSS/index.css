@@ -1,0 +1,28 @@
+html{
+ background-image: url('../../assets/home-image.png');
+ background-repeat: no-repeat;
+ background-position: center;
+ /* background-size: cover; */
+ height: 100%;
+ width: 100%;
+}
+ 
+
+
+body {
+    /* margin-top: 50px; */
+   
+}
+.title {
+    /* border: 1px solid silver; */
+    width: 400px;
+    height: 400px;
+    /* background-color: white; */
+    margin: auto;
+    margin-top: 170px;
+    text-align: center;
+    padding: 10px;
+    opacity: 0.75;
+    filter: alpha(opacity=75);
+    color: white;
+}

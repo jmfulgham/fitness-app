@@ -30,7 +30,7 @@ describe('Testing CRUD', function () {
 
     it('the profile page shows up', function () {
         return chai.request(app)
-            .get('/profile/name/leggy_linda01')
+            .get('/profile/JSON/leggy_linda01')
             .then(function (profileResponse) {
                 profileResponse.should.have.status(200);
                 profileResponse.should.be.json;
@@ -84,7 +84,7 @@ describe('Testing CRUD', function () {
             }]
         }
         return chai.request(app)
-            .post('/profile/name/ww404').send(newRoutine)
+            .post('/profile/JSON/ww404').send(newRoutine)
             .then((res) => {
                 res.should.have.status(201);
                 res.should.be.json;
@@ -97,13 +97,13 @@ describe('Testing CRUD', function () {
     it('should delete a workout on DELETE', function () {
         let newID;
         return chai.request(app)
-            .get('/all-routines')
+            .get('/all-routines/JSON')
         newID = res.body[0].id;
         return chai.request(app)
-            .get(`/workout/${newID}`)
+            .get(`/workout/JSON/${newID}`)
             .then(() => {
                 chai.request(app)
-                    .delete(`/workout/${newId}`)
+                    .delete(`/workout/JSON/${newId}`)
                     .then(response => {
                         response.should.have.status(204);
                     })
@@ -116,9 +116,9 @@ describe('Testing CRUD', function () {
 
     it('should update a workout on PUT', function () {
         return chai.request(app)
-                .put('/workout/5a63fcc5d456d2482a799f72')
+                .put('/workout/JSON/5a63fcc5d456d2482a799f72')
                 .send({
-                    //"id": "5a63fcc5d456d2482a799f72",
+                    
                     "uppper": [{
                         "Exercise": "Upright Row",
                         "Sets": 2,
@@ -136,7 +136,7 @@ describe('Testing CRUD', function () {
 
     it('the all-routines page should show up and populate correctly', function () {
         return chai.request(app)
-            .get('/all-routines')
+            .get('/all-routines/JSON')
             .then(function (routinesResponse) {
                 routinesResponse.should.have.status(200);
                 routinesResponse.should.be.json;

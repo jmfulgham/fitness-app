@@ -1,0 +1,39 @@
+html {
+    background-image: url('../../assets/routines2.png');
+    background-size: cover;
+     background-repeat: no-repeat;
+     /* background-color: #cc17a0; */
+}
+row {
+    margin: 5px;
+    padding: 15px;
+}
+
+.section {
+    margin: 20px;
+    padding: 10px;
+    min-height: 150px;
+    background-color: white;
+    border-radius: 40px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+footer{
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    color: white;
+    background-color:#282525;
+    width:100%;
+    left:0;
+    padding: 20px;
+}
+
+
+

@@ -1,0 +1,9 @@
+html{
+    background-image:url('../../assets/background2.png');
+   background-size:cover;
+   background-repeat: no-repeat;
+    
+}
+.editable {
+    background: #EAEAEA
+}
