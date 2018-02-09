@@ -5,7 +5,7 @@
 function getAllRoutines() {
     $.ajax({
         type: "GET",
-        url: `http://localhost:9000/all-routines/JSON/`,
+        url: `https://fierce-springs-45667.herokuapp.com/all-routines/JSON/`,
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"

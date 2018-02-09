@@ -16,7 +16,7 @@ let classButtonSave;
 function getProfile(username) {
     $.ajax({
         type: "GET",
-        url: `localhost:9000/profile/names/${username}`,
+        url: `https://fierce-springs-45667.herokuapp.com/profile/names/${username}`,
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"
@@ -31,7 +31,7 @@ function getProfile(username) {
 function getJSONProfile(username) {
     $.ajax({
         type: "GET",
-        url: `http://localhost:9000/profile/JSON/${username}`,
+        url: `https://fierce-springs-45667.herokuapp.com/profile/JSON/${username}`,
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"
@@ -49,7 +49,7 @@ function handleDelete(id, del) {
         console.log("You clicked delete", id);
         $.ajax({
             method: "DELETE",
-            url: `http://localhost:9000/workout/JSON/${id}`,
+            url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
             dataType: 'json',
             headers: {
                 "Content-Type": "application/json"
@@ -78,7 +78,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
     //     console.log("AFTER the PUT", id, replacementWorkout, bodyPart);
     $.ajax({
         method: "PUT",
-        url: `http://localhost:9000/workout/JSON/${id}`,
+        url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
         data: `{ 
                 ${bodyPart} :[
                      ${replacementWorkout}
