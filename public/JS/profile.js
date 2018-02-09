@@ -203,11 +203,15 @@ function triggerSave(classSetColumn, classButton, id) {
 function handleSave(classSetColumn, classButton, id) {
     classButtonSave = classButton;
     newPart = $("h4" + classSetColumn).text();
+    
     //if newPart is blank, null or undefined, send message
     let newExercise = $("h5" + classSetColumn).text();
     let firstChild = $("ul li:nth-child(1)" + classSetColumn).text();
     let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
     let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
+    if (firstChild || secondChild || thirdChild === null) {
+        alert("Please enter a number");
+    }
     convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
 }
 
@@ -219,9 +223,7 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     let sets;
     let reps;
     let lbs;
-    if (firstChild.match(re)[0] || secondChild.match(re)[0] || thirdChild.match(re)[0] == null || undefined) {
-        alert("Please enter a number");
-    }
+   
     sets = firstChild.match(re)[0];
     reps = secondChild.match(re)[0];
     let reps2 = secondChild.match(re)["input"];
