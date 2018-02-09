@@ -7,3 +7,13 @@ html{
 .editable {
     background: #EAEAEA
 }
+
+input:focus{
+    border-color:purple;
+}
+
+input{
+    display:block;
+    width:150px;
+  
+}
