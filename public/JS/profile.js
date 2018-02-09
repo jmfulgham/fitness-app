@@ -219,6 +219,9 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     let sets;
     let reps;
     let lbs;
+    if (firstChild.match(re)[0] || secondChild.match(re)[0] || thirdChild.match(re)[0] == null || undefined) {
+        alert("Please enter a number");
+    }
     sets = firstChild.match(re)[0];
     reps = secondChild.match(re)[0];
     let reps2 = secondChild.match(re)["input"];
@@ -232,10 +235,8 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     reps = parseInt(reps3, 10);
     lbs = parseInt(lbs3, 10);
     //if sets reps lbs is null or undefined, send a message
-    if (sets || reps || lbs == null || undefined){
-        alert("Please enter a number");
-    }
     
+
     newObject = {
         "Exercise": newExercise,
         Sets: sets,
