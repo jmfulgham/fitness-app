@@ -25,7 +25,7 @@ function handleNames(list) {
         let username = shortList.username;
         $(".row").append(`<section class="section col-4 shadow">
         <h3>${username}</h3><button onclick="window.location.href = '/profile/name/${username}';">
-        View My Profile</button></section>`);
+        View My Workouts</button></section>`);
 
     })
 }
