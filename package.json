@@ -8,6 +8,7 @@
         "test": "NODE_ENV='test' mocha --exit ./test"
     },
     "dependencies": {
+        "cors": "^2.8.4",
         "express": "^4.16.2",
         "moment": "^2.20.1",
         "mongo": "^0.1.0",

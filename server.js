@@ -6,6 +6,8 @@ const router= require('./router');
 const app = express();
 const morgan = require('morgan');
 mongoose.Promise = global.Promise;
+const cors = require('cors');
+app.use(cors());
 
 //more app set up
 app.use(express.static('public'));

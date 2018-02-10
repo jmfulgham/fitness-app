@@ -196,6 +196,8 @@ function handleEdit(classButton, classSetColumn, id) {
 function triggerSave(classSetColumn, classButton, id) {
     $(`button${classButton}.save`).on("click", event => {
         console.log("Trigger triggered");
+        console.log (classButton.save);
+        console.log( $(`button${classButton}.save`));
         handleSave(classSetColumn, classButton, id)
     })
 }
@@ -204,11 +206,11 @@ function handleSave(classSetColumn, classButton, id) {
     classButtonSave = classButton;
     newPart = $("h4" + classSetColumn).text();
     console.log(newPart);
-    if (newPart === "") {
-        $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter Upper or Lower </h4></section>`);
-        return "done";
-    }
-    else {
+    // if (newPart === "") {
+    //     $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter Upper or Lower </h4></section>`);
+    //     return ;
+    // }
+    // else {
         //if newPart is blank, null or undefined, send message
         let newExercise = $("h5" + classSetColumn).text();
         //if newExercise is blank, null or undefined, send message
@@ -223,7 +225,7 @@ function handleSave(classSetColumn, classButton, id) {
 
         convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
     }
-}
+//}
 
 
 
