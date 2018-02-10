@@ -211,7 +211,7 @@ function handleSave(classSetColumn, classButton, id) {
     let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
     if (firstChild || secondChild || thirdChild === null) {
         $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter a number</h4></section>`);
-        return "done";
+        return;
     }
     
     convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
