@@ -1,9 +1,5 @@
 'use strict';
 
-//check setColumn to make everything editable
-//make sure we can edit upper and lower
-// then feed all to PUT request
-
 let workoutDate = "";
 let upperWorkout = "";
 let lowerWorkout = "";
@@ -45,7 +41,6 @@ function getJSONProfile(username) {
 
 function handleDelete(id, del) {
     $(del).on("click", event => {
-        // console.log("You clicked delete", id);
         $.ajax({
             method: "DELETE",
             url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
@@ -66,12 +61,9 @@ function handleDelete(id, del) {
 }
 
 function handlePut(id, classButtonSave, newObject, newPart) {
-    // console.log("before the PUT", id, newObject, newPart, classButtonSave);
     let parts = newPart.toLowerCase();
-    // console.log("parts ", parts);
     let bodyPart = JSON.stringify(parts);
     let replacementWorkout = JSON.stringify(newObject);
-    // console.log("modified", id, bodyPart, replacementWorkout);
     $.ajax({
         method: "PUT",
         url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
@@ -189,11 +181,9 @@ function toggleEditSave(classButton, classSetColumn, id) {
 
 function handleButton(classButton, classSetColumn, id) {
     $(classButton).on('click', event => {
-        console.log("target ", $(event.target).text())
         if ($(event.target).text() === "Save") {
             handleSave(classButton, classSetColumn, id);
         }
-
         toggleEditSave(classButton, classSetColumn, id);
 
     })
@@ -204,7 +194,6 @@ function handleSave(classButton, classSetColumn, id) {
     classButtonSave = classButton;
     newPart = $("h4" + classSetColumn).text();
     let newExercise = $("h5" + classSetColumn).text();
-    console.log("New part ", newExercise);
     if (newExercise === "") {
         $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter an Exercise</h4></section>`);
         return ;
@@ -236,7 +225,6 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     sets = parseInt(sets, 10);
     reps = parseInt(reps2, 10);
     lbs = parseInt(lbs2, 10);
- console.log ("New Ex Ob ", newExercise);
     newObject = {
         "Exercise": newExercise,
         Sets: sets,

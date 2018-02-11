@@ -1,7 +1,4 @@
 'use strict';
-
-
-
 function getAllRoutines() {
     $.ajax({
         type: "GET",
@@ -15,8 +12,6 @@ function getAllRoutines() {
         }
     })
 }
-
-
 
 //routines API
 function handleNames(list) {
@@ -41,7 +36,3 @@ function removeDupes(list) {
     });
     return arr;
 }
-
-
-
-

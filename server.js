@@ -16,7 +16,6 @@ app.use('/', router);
 app.use('/profile',router);
 app.use(morgan('common'));
 
-//templating engine set up 
 
 //enivornment setup
 const { PORT, DATABASE_URL } = require('./config');
