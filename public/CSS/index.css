@@ -1,23 +1,15 @@
-html{
- background-image: url('../../assets/home-image.png');
- background-repeat: no-repeat;
- background-position: center;
- /* background-size: cover; */
- height: 100%;
- width: 100%;
-}
- 
 
 
 body {
-    /* margin-top: 50px; */
-   
+   background-image: url('../../assets/home-image.png');
+   background-position: center center;
+   background-repeat : no-repeat;
+   background-attachment: fixed;
+   background-size : cover;
+   background-color: #999;
 }
 .title {
-    /* border: 1px solid silver; */
-    width: 400px;
-    height: 400px;
-    /* background-color: white; */
+    
     margin: auto;
     margin-top: 170px;
     text-align: center;

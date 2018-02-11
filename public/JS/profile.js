@@ -197,23 +197,25 @@ function handleButton(classButton, classSetColumn, id) {
         toggleEditSave(classButton, classSetColumn, id);
 
     })
-    
+
 }
 
 function handleSave(classButton, classSetColumn, id) {
     classButtonSave = classButton;
     newPart = $("h4" + classSetColumn).text();
-    if (newPart === !"Upper"){
-        console.log ("not upper");
+    let newExercise = $("h5" + classSetColumn).text();
+    console.log("New part ", newExercise);
+    if (newExercise === "") {
+        $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter an Exercise</h4></section>`);
+        return ;
     }
-    else{
-        let newExercise = $("h5" + classSetColumn).text();
-        let firstChild = $("ul li:nth-child(1)" + classSetColumn).text();
-        let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
-        let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
+    let firstChild = $("ul li:nth-child(1)" + classSetColumn).text();
+    let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
+    let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
         convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
-    }
+
 }
+
 function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     const re = /\d/;
     let sets;
@@ -223,23 +225,23 @@ function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
         sets = firstChild.match(re)[0];
         reps = secondChild.match(re)[0];
         lbs = thirdChild.match(re)[0];
-    }
-    else {
+    } else {
         $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter a number</h4></section>`);
         return;
     }
 
     let reps2 = secondChild.match(re)["input"].slice(5);
     let lbs2 = thirdChild.match(re)["input"].slice(5);
-     
+
     sets = parseInt(sets, 10);
     reps = parseInt(reps2, 10);
     lbs = parseInt(lbs2, 10);
+ console.log ("New Ex Ob ", newExercise);
     newObject = {
         "Exercise": newExercise,
         Sets: sets,
         Reps: reps,
         Lbs: lbs
     }
-    handlePut(id, classButtonSave, newObject, newPart) 
+    handlePut(id, classButtonSave, newObject, newPart)
 }
