@@ -1,4 +1,3 @@
-<!-- HTML for profile after sign up!-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,22 +19,17 @@
     <script>
         getJSONProfile(window.location.pathname.split('/')[3]);
     </script>
-    <!-- <script>
-        postInfo();
-    </script> -->
 </head>
 
-
 <body>
-<nav role="navigation" class="nav">
-    <a href="/">Home</a>
-    <a href="/all-routines">Other Workouts</a>
-</nav>
+    <nav role="navigation" class="nav">
+        <a href="/">Home</a>
+        <a href="/all-routines">Other Workouts</a>
+    </nav>
     <main role="main">
-        
-        
+
         <div class="row create">
-            
+
             <section class="col-4">
                 <h3>Create New Routine</h3>
                 <form method="post">
@@ -49,7 +43,7 @@
                             <option value="upper">Upper Body</option>
                             <option value="lower">Lower Body</option>
                         </select>
-                         <br> Exercise:
+                        <br> Exercise:
                         <input type="text" name="exercise" id="exercise" required>
                         <Br> Sets:
                         <input type="number" name="sets" id="sets" required>
@@ -58,32 +52,21 @@
                         <br> Lbs:
                         <input type="number" name="lbs" id="lbs" required>
                         <br>
-                        <!-- <button type="button" value="add" id="add">Add More</button> -->
-                        <button type="submit" value="submit" id ="submit">Submit</button>
+                        <button type="submit" value="submit" id="submit">Submit</button>
                     </fieldset>
                 </form>
             </section>
         </div>
 
         <div class="row">
-            
-    
-            <div class="list">
-</div>
 
+
+            <div class="list">
             </div>
 
-
-
-
-
-
-
-
+        </div>
 
     </main>
-
-
 </body>
 
 </html>
