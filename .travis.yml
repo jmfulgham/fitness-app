@@ -1,5 +1,5 @@
 language: node_js
-node_js: node
+node_js: node v8.9.3
 deploy:
   provider: heroku
   api_key:
