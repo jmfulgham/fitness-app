@@ -7,3 +7,4 @@ deploy:
   app: fierce-springs-45667
   on:
     repo: jmfulgham/fitness-app
+
