@@ -1,5 +1,6 @@
 # Group-Fit
 https://fierce-springs-45667.herokuapp.com/
+
 A web app that allows a community to workout together.
 
 ### Functionality
