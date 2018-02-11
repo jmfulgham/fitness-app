@@ -45,7 +45,7 @@ function getJSONProfile(username) {
 
 function handleDelete(id, del) {
     $(del).on("click", event => {
-        console.log("You clicked delete", id);
+        // console.log("You clicked delete", id);
         $.ajax({
             method: "DELETE",
             url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
@@ -66,12 +66,12 @@ function handleDelete(id, del) {
 }
 
 function handlePut(id, classButtonSave, newObject, newPart) {
-    console.log("before the PUT", id, newObject, newPart, classButtonSave);
+    // console.log("before the PUT", id, newObject, newPart, classButtonSave);
     let parts = newPart.toLowerCase();
-    console.log("parts ", parts);
+    // console.log("parts ", parts);
     let bodyPart = JSON.stringify(parts);
     let replacementWorkout = JSON.stringify(newObject);
-    console.log("modified", id, bodyPart, replacementWorkout);
+    // console.log("modified", id, bodyPart, replacementWorkout);
     $.ajax({
         method: "PUT",
         url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
@@ -155,7 +155,6 @@ function showAllLowerWorkout(lowers, setColumn) {
     lowers.forEach(function (item) {
         result = result + showOneLowerWorkout(item, setColumn);
     })
-
     return result;
 }
 
@@ -173,92 +172,74 @@ function displayOriginalObject(originalObject) {
         edit = `.edit${index}`;
         setColumn = `.setColumn${index}`;
         del = `.delete${index}`;
-        handleEdit(edit, setColumn, item.id);
+        handleButton(edit, setColumn, item.id);
+        let save = edit + '.save';
         handleDelete(item.id, del);
-
     })
 
 }
 
+function toggleEditSave(classButton, classSetColumn, id) {
+    let isEditable = $(classSetColumn).is('.editable');
+    $(classSetColumn).prop('contenteditable', !isEditable);
+    $(classSetColumn).toggleClass('editable');
+    isEditable ? $(classButton).text('Edit') : $(classButton).text('Save');
+    $(classButton).toggleClass('save');
+}
 
-function handleEdit(classButton, classSetColumn, id) {
+function handleButton(classButton, classSetColumn, id) {
     $(classButton).on('click', event => {
-        let isEditable = $(classSetColumn).is('.editable');
-        $(classSetColumn).prop('contenteditable', !isEditable);
-        $(classSetColumn).toggleClass('editable');
-        isEditable ? $(classButton).text('Edit') : $(classButton).text('Save');
-        $(classButton).toggleClass('save');
-        triggerSave(classSetColumn, classButton, id);
+        console.log("target ", $(event.target).text())
+        if ($(event.target).text() === "Save") {
+            handleSave(classButton, classSetColumn, id);
+        }
+
+        toggleEditSave(classButton, classSetColumn, id);
+
     })
-    console.log("handleEdit done")
+    
 }
 
-function triggerSave(classSetColumn, classButton, id) {
-    $(`button${classButton}.save`).on("click", event => {
-        console.log("Trigger triggered");
-        console.log (classButton.save);
-        console.log( $(`button${classButton}.save`));
-        handleSave(classSetColumn, classButton, id)
-    })
-}
-
-function handleSave(classSetColumn, classButton, id) {
+function handleSave(classButton, classSetColumn, id) {
     classButtonSave = classButton;
     newPart = $("h4" + classSetColumn).text();
-    console.log(newPart);
-    // if (newPart === "") {
-    //     $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter Upper or Lower </h4></section>`);
-    //     return ;
-    // }
-    // else {
-        //if newPart is blank, null or undefined, send message
+    if (newPart === !"Upper"){
+        console.log ("not upper");
+    }
+    else{
         let newExercise = $("h5" + classSetColumn).text();
-        //if newExercise is blank, null or undefined, send message
         let firstChild = $("ul li:nth-child(1)" + classSetColumn).text();
         let secondChild = $("ul li:nth-child(2)" + classSetColumn).text();
         let thirdChild = $("ul li:nth-child(3)" + classSetColumn).text();
-        console.log("children ", firstChild, secondChild, thirdChild);
-        if (firstChild || secondChild || thirdChild === null) {
-            $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter a number</h4></section>`);
-            return;
-        }
-
         convertToObj(id, newExercise, firstChild, secondChild, thirdChild);
     }
-//}
-
-
-
-
+}
 function convertToObj(id, newExercise, firstChild, secondChild, thirdChild) {
     const re = /\d/;
     let sets;
     let reps;
     let lbs;
-   
-    sets = firstChild.match(re)[0];
-    reps = secondChild.match(re)[0];
-    let reps2 = secondChild.match(re)["input"];
-    let reps3 = reps2.slice(6);
-    lbs = thirdChild.match(re)[0];
-    let lbs2 = thirdChild.match(re)["input"];
-    let lbs3 = lbs2.slice(5);
+    if (firstChild.match(re) && secondChild.match(re) && thirdChild.match(re)) {
+        sets = firstChild.match(re)[0];
+        reps = secondChild.match(re)[0];
+        lbs = thirdChild.match(re)[0];
+    }
+    else {
+        $(".create").append(`<section class="col-4" aria-live="polite"><h4>Please enter a number</h4></section>`);
+        return;
+    }
 
-
+    let reps2 = secondChild.match(re)["input"].slice(5);
+    let lbs2 = thirdChild.match(re)["input"].slice(5);
+     
     sets = parseInt(sets, 10);
-    reps = parseInt(reps3, 10);
-    lbs = parseInt(lbs3, 10);
-    //if sets reps lbs is null or undefined, send a message
-    
-
+    reps = parseInt(reps2, 10);
+    lbs = parseInt(lbs2, 10);
     newObject = {
         "Exercise": newExercise,
         Sets: sets,
         Reps: reps,
         Lbs: lbs
     }
-    console.log("object converted, ", newObject)
-    console.log("sent to PUT")
     handlePut(id, classButtonSave, newObject, newPart) 
-    console.log("PUT triggered");
 }
