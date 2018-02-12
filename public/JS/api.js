@@ -54,7 +54,7 @@ function postInfo() {
         username = username.replace('%20', ' ');
         $.ajax({
             type: "POST",
-            url: `http://localhost:9000/profile/JSON/${username}`,
+            url: `https://fierce-springs-45667.herokuapp.com/profile/JSON/${username}`,
             data: `{
             "username" : ${username}, 
                 "date" : ${dates},

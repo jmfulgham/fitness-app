@@ -51,7 +51,6 @@ router.post('/profile/JSON/:username', jsonParser, (req, res) => {
         upper,
         lower
     })
-    console.log(newRoutine);
     newRoutine.save()
         .then(newRoutine =>
             res.status(201).json(newRoutine.neaten())

@@ -14,7 +14,7 @@ let globalUsername;
 
 //     $.ajax({
 //         type: "GET",
-//         url: `http://localhost:9000/profile/names/${username}`,
+//         url: `https://fierce-springs-45667.herokuapp.com/profile/names/${username}`,
 //         dataType: 'json',
 //         headers: {
 //             "Content-Type": "application/json"
@@ -31,7 +31,7 @@ function getJSONProfile(username) {
     console.log("gu ", globalUsername);
     $.ajax({
         type: "GET",
-        url: `http://localhost:9000/profile/JSON/${username}`,
+        url: `https://fierce-springs-45667.herokuapp.com/profile/JSON/${username}`,
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"
@@ -47,18 +47,16 @@ function handleDelete(id, del) {
     $(del).on("click", event => {
         $.ajax({
             method: "DELETE",
-            url: `http://localhost:9000/workout/JSON/${id}`,
+            url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
             dataType: 'json',
             headers: {
                 "Content-Type": "application/json"
             },
             success: function () {
-                //$(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Deleted</h4></section>`);
                 $.toast("It's been deleted.");  
 
                 $(event.target).parent().remove();
                 
-                // location.reload();
             },
             error: function () {
                 alert("Error")
@@ -76,7 +74,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
     let replacementWorkout = JSON.stringify(newObject);
     $.ajax({
         method: "PUT",
-        url: `http://localhost:9000/workout/JSON/${id}`,
+        url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
         data: `{ 
                 ${bodyPart} :[
                      ${replacementWorkout}
@@ -87,7 +85,6 @@ function handlePut(id, classButtonSave, newObject, newPart) {
             "Content-Type": "application/json"
         },
         success: function () {
-            // $(".create").append(`<section class="col-4" aria-live="polite"><h4>Saved</h4></section>`);
             $.toast("Workout Saved.")
         },
         error: function (err, req) {
