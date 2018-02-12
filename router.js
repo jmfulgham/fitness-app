@@ -39,7 +39,6 @@ router.get('/all-routines/', (req, res) => {
 })
 router.post('/profile/JSON/:username', jsonParser, (req, res) => {
     const {
-        name,
         username,
         date,
         upper,
@@ -47,11 +46,12 @@ router.post('/profile/JSON/:username', jsonParser, (req, res) => {
     } = req.body;
 
     const newRoutine = new routine({
-        username: req.body.username,
-        date: req.body.date,
-        upper: req.body.upper,
-        lower: req.body.lower
+        username,
+        date,
+        upper,
+        lower
     })
+    console.log(newRoutine);
     newRoutine.save()
         .then(newRoutine =>
             res.status(201).json(newRoutine.neaten())

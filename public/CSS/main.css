@@ -31,6 +31,7 @@ nav {
  a:hover {
     color: white;
     text-decoration: none;
+    
  }
 
 nav > a {
@@ -53,6 +54,7 @@ button {
     background-color: white;
     box-shadow: 0 8px 6px -8px black;
     margin-top: 5px;
+    cursor: pointer;
 }
  button:hover {
     /* -webkit-transition: all 1500ms ease-in;

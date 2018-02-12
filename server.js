@@ -14,6 +14,7 @@ app.use(express.static('public'));
 
 app.use('/', router);
 app.use('/profile',router);
+app.use('/node_modules', express.static(__dirname + '/node_modules/'));
 app.use(morgan('common'));
 
 

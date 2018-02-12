@@ -7,27 +7,31 @@ let id;
 let newObject;
 let newPart;
 let classButtonSave;
+let globalUsername;
 //////////////////////////////////      API requests
 
-function getProfile(username) {
-    $.ajax({
-        type: "GET",
-        url: `https://fierce-springs-45667.herokuapp.com/profile/names/${username}`,
-        dataType: 'json',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        success: function (list) {
-            return list
-        }
-    })
-}
+// function getProfile(username) {
+
+//     $.ajax({
+//         type: "GET",
+//         url: `http://localhost:9000/profile/names/${username}`,
+//         dataType: 'json',
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         success: function (list) {
+//             return list
+//         }
+//     })
+// }
 
 
 function getJSONProfile(username) {
+    globalUsername = username;
+    console.log("gu ", globalUsername);
     $.ajax({
         type: "GET",
-        url: `https://fierce-springs-45667.herokuapp.com/profile/JSON/${username}`,
+        url: `http://localhost:9000/profile/JSON/${username}`,
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"
@@ -43,21 +47,27 @@ function handleDelete(id, del) {
     $(del).on("click", event => {
         $.ajax({
             method: "DELETE",
-            url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
+            url: `http://localhost:9000/workout/JSON/${id}`,
             dataType: 'json',
             headers: {
                 "Content-Type": "application/json"
             },
             success: function () {
-                $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Deleted</h4></section>`);
-                location.reload();
+                //$(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Deleted</h4></section>`);
+                $.toast("It's been deleted.");  
+
+                $(event.target).parent().remove();
+                
+                // location.reload();
             },
             error: function () {
                 alert("Error")
             }
+        
         })
-
+            
     })
+       
 }
 
 function handlePut(id, classButtonSave, newObject, newPart) {
@@ -66,7 +76,7 @@ function handlePut(id, classButtonSave, newObject, newPart) {
     let replacementWorkout = JSON.stringify(newObject);
     $.ajax({
         method: "PUT",
-        url: `https://fierce-springs-45667.herokuapp.com/workout/JSON/${id}`,
+        url: `http://localhost:9000/workout/JSON/${id}`,
         data: `{ 
                 ${bodyPart} :[
                      ${replacementWorkout}
@@ -77,7 +87,8 @@ function handlePut(id, classButtonSave, newObject, newPart) {
             "Content-Type": "application/json"
         },
         success: function () {
-            $(".create").append(`<section class="col-4" aria-live="polite"><h4>Saved</h4></section>`);
+            // $(".create").append(`<section class="col-4" aria-live="polite"><h4>Saved</h4></section>`);
+            $.toast("Workout Saved.")
         },
         error: function (err, req) {
             console.log("err", err, req);

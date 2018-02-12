@@ -1,3 +1,4 @@
+
 'use strict';
 
 let date = "";
@@ -50,11 +51,12 @@ function postInfo() {
         let bodyParts = JSON.stringify(getBodyPart());
         let workoutDetails = JSON.stringify(getExercise());
         let username = JSON.stringify(window.location.pathname.split("/")[3]);
+        username = username.replace('%20', ' ');
         $.ajax({
             type: "POST",
-            url: `https://fierce-springs-45667.herokuapp.com/profile/JSON/${username}`,
+            url: `http://localhost:9000/profile/JSON/${username}`,
             data: `{
-            "username" : ${username},
+            "username" : ${username}, 
                 "date" : ${dates},
                 ${bodyParts}: [ ${workoutDetails}]
             }`,
@@ -63,8 +65,7 @@ function postInfo() {
                 "Content-Type": "application/json"
             },
             success: function () {
-                $(".create").append(`<section class="col-4" aria-live="polite"><h4>Workout Saved</h4></section>`);
-                location.reload();
+                $.toast("Workout Saved");
             },
             error: function (req) {
                 alert("Error saving workout");
