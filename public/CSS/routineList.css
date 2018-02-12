@@ -1,4 +1,7 @@
 
+p > a {
+    color: white;
+}
 
 body {
     margin-top: 50px;
@@ -16,7 +19,7 @@ row {
     padding: 15px;
 }
 
-h1 {
+h1, p{
     color: white;
     margin-left: 10px;
 }
